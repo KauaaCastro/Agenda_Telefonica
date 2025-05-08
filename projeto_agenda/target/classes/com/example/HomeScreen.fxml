@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.PrimaryController">
+   <left>
+      <VBox prefHeight="800.0" prefWidth="275.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="72.0" prefWidth="275.0">
+               <children>
+                  <Label prefHeight="54.0" prefWidth="157.0" text="Agenda">
+                     <font>
+                        <Font name="Arial Black" size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="pro_search" prefHeight="25.0" prefWidth="210.0" promptText="Search" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="51.0" prefWidth="275.0">
+               <children>
+                  <Button fx:id="pro_editcontact" mnemonicParsing="false" text="Editar Contatos" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="51.0" prefWidth="275.0">
+               <children>
+                  <Button fx:id="pro_addContact" mnemonicParsing="false" onAction="#AddContactsScreen" text="Adicionar Contatos" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="51.0" prefWidth="275.0">
+               <children>
+                  <Button fx:id="pro_removeContact" mnemonicParsing="false" text="Remover Contatos" />
+               </children>
+            </HBox>
+            <Pane prefHeight="56.0" prefWidth="275.0" />
+            <HBox alignment="CENTER" prefHeight="72.0" prefWidth="275.0">
+               <children>
+                  <Label prefHeight="54.0" prefWidth="135.0" text="Tarefa">
+                     <font>
+                        <Font name="Arial Black" size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="pro_searchTarefa" prefHeight="25.0" prefWidth="210.0" promptText="Search" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="51.0" prefWidth="275.0">
+               <children>
+                  <Button fx:id="pro_editTarefa" mnemonicParsing="false" text="Editar Tarefas" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="51.0" prefWidth="275.0">
+               <children>
+                  <Button fx:id="pro_addTarefa" mnemonicParsing="false" text="Adicionar Tarefas" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="51.0" prefWidth="275.0">
+               <children>
+                  <Button fx:id="pro_removeTarefa" mnemonicParsing="false" text="Remover Tarefas" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="table_1" prefHeight="368.0" prefWidth="1005.0">
+               <columns>
+                  <TableColumn fx:id="table_1Name" prefWidth="127.0" text="Nome" />
+                  <TableColumn fx:id="table_1Apelido" prefWidth="138.0" text="Apelido" />
+                  <TableColumn fx:id="table_1NumeroTelefone" prefWidth="149.0" text="Número de telefone" />
+               </columns>
+            </TableView>
+            <TableView fx:id="table2" prefHeight="436.0" prefWidth="1005.0">
+              <columns>
+                <TableColumn fx:id="table2Tarefa" prefWidth="75.0" text="Tarefa" />
+                <TableColumn fx:id="table2Data" prefWidth="75.0" text="Data" />
+                  <TableColumn fx:id="table2Pessoas" prefWidth="75.0" text="Pessoas" />
+                  <TableColumn fx:id="table2Pessoas_2" prefWidth="75.0" />
+                  <TableColumn fx:id="table2Pessoas_3" prefWidth="75.0" />
+                  <TableColumn fx:id="table2Pessoas_4" prefWidth="75.0" />
+                  <TableColumn fx:id="table2Pessoas_5" prefWidth="75.0" />
+                  <TableColumn fx:id="table2Pessoas_6" prefWidth="75.0" />
+                  <TableColumn fx:id="table2Pessoas_7" prefWidth="75.0" />
+                  <TableColumn fx:id="table2Local" prefWidth="75.0" text="Local" />
+                  <TableColumn fx:id="table2Endereço" prefWidth="75.0" text="Endereço" />
+                  <TableColumn fx:id="table2Descrição" prefWidth="179.0" text="Descrição" />
+              </columns>
+            </TableView>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
