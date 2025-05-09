@@ -1,15 +1,15 @@
 package com.example;
 
-import java.io.IOException;
+import com.example.ContactsTable.AppState;
+import com.example.ContactsTable.ContactService;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
 public class AddContactsController {
@@ -21,22 +21,31 @@ public class AddContactsController {
     private Button ShowInfos;
 
     @FXML
+    private RadioButton gender_Indef;
+
+    @FXML
+    private RadioButton gender_homem;
+
+    @FXML
+    private RadioButton gender_mulher;
+
+    @FXML
+    private ToggleGroup pro_gender;
+
+    @FXML
     private TextField pro_NickName;
 
     @FXML
     private TextField pro_Relation;
 
     @FXML
-    private TextField pro_birthday;
+    private DatePicker pro_datePicker;
 
     @FXML
     private TextField pro_endress;
 
     @FXML
     private TextField pro_extra;
-
-    @FXML
-    private TextField pro_gender;
 
     @FXML
     private TextField pro_name;
@@ -50,24 +59,37 @@ public class AddContactsController {
     @FXML
     private Button saveContact;
 
-    // Retorna para a tela inicial
     @FXML
     void ReturnHomeScreen(ActionEvent event) {
-        try {
-            System.out.println("Abrindo tela inicial!");
-            Parent secondView = FXMLLoader.load(getClass().getResource("/com/example/HomeScreen.fxml"));
-            Scene secondScene = new Scene(secondView);
+        Stage stage = (Stage) HomeScreen.getScene().getWindow();
+        stage.close();
+    }
 
-            // Para retornar a janela para a tela inicial
-            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            currentStage.setScene(secondScene);
-            currentStage.show();
+    @FXML
+    void SaveContact(ActionEvent event) {
+        String newName = pro_name.getText();
+        String nick = pro_NickName.getText();
+        String tell = pro_numberTell.getText();
+        String birthday = (pro_datePicker.getValue() != null) ? pro_datePicker.getValue().toString() : "";
 
-        } catch (IOException e) {
-            System.out.println("Ocorreu um erro ao tentar abrir a nova janela");
-            System.out.println("Código do erro: ");
-            System.out.println();
-            e.getStackTrace();
+        String gender = "";
+        RadioButton selectedRadio = (RadioButton) pro_gender.getSelectedToggle();
+
+        if (selectedRadio != null) {
+            gender = selectedRadio.getText();
         }
+
+        ContactService contacts = new ContactService(newName, nick, gender, birthday, tell);
+
+        AppState.getContacts().add(contacts);
+
+        pro_name.clear();
+        pro_NickName.clear();
+        pro_numberTell.clear();
+        pro_datePicker.setValue(null);
+        pro_gender.selectToggle(null);
+
+        Stage stage = (Stage) saveContact.getScene().getWindow();
+        stage.close();
     }
 }

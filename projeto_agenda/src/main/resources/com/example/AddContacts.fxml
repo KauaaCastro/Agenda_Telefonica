@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -43,22 +46,12 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <Label text="Genero:">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="pro_gender" prefHeight="25.0" prefWidth="152.0" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
-               <children>
                   <Label text="Data de Aniversário:">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="pro_birthday" prefHeight="25.0" prefWidth="187.0" />
+                  <DatePicker fx:id="pro_datePicker" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
@@ -69,6 +62,22 @@
                      </font>
                   </Label>
                   <TextField fx:id="pro_numberTell" prefHeight="25.0" prefWidth="170.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Label text="Genero:">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <RadioButton fx:id="gender_homem" mnemonicParsing="false" text="Homem">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="pro_gender" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="gender_mulher" mnemonicParsing="false" text="Mulher" toggleGroup="$pro_gender" />
+                  <RadioButton fx:id="gender_Indef" mnemonicParsing="false" text="Não Definir" toggleGroup="$pro_gender" />
                </children>
             </HBox>
          </children>
@@ -128,7 +137,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                <children>
-                  <Button fx:id="saveContact" mnemonicParsing="false" text="Salvar Contato" />
+                  <Button fx:id="saveContact" mnemonicParsing="false" onAction="#SaveContact" text="Salvar Contato" />
                   <Button fx:id="ShowInfos" mnemonicParsing="false" text="Visualizar Informações" />
                   <Button fx:id="HomeScreen" mnemonicParsing="false" onAction="#ReturnHomeScreen" text="Tela inicial" />
                </children>
