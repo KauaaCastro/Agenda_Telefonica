@@ -159,13 +159,6 @@ public class PrimaryController {
         loadRemoveContacts();
     }
 
-    // Tela de edição dos contatos
-    @FXML
-    void EditContacts(ActionEvent event) throws IOException {
-
-        // Abre o POP UP como modal, ou seja, abre bloqueando a janela anterior
-        
-    }
 
     // Funcionamento da Dash Board
     public void loadAddContacts() {
