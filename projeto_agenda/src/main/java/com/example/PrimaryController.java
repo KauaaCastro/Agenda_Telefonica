@@ -164,17 +164,7 @@ public class PrimaryController {
     void EditContacts(ActionEvent event) throws IOException {
 
         // Abre o POP UP como modal, ou seja, abre bloqueando a janela anterior
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/EditionScreen.fxml"));
-        Parent root = loader.load();
-
-        Stage alertStage = new Stage();
-        alertStage.setTitle("Adicionar contatos");
-        alertStage.setScene(new Scene(root));
-
-        alertStage.initModality(Modality.APPLICATION_MODAL);
-
-        alertStage.showAndWait();
-
+        
     }
 
     // Funcionamento da Dash Board
