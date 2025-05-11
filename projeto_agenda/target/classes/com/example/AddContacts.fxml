@@ -15,15 +15,6 @@
    <left>
       <VBox prefHeight="600.0" prefWidth="493.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="354.0">
-               <children>
-                  <Label text="Adicionar Contato">
-                     <font>
-                        <Font size="28.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
                   <Label text="Nome:">
@@ -31,7 +22,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="pro_name" prefHeight="25.0" prefWidth="152.0" />
+                  <TextField fx:id="pro_name" prefHeight="25.0" prefWidth="152.0" promptText="ex: Kauã Ricardo" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
@@ -41,17 +32,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="pro_NickName" prefHeight="25.0" prefWidth="152.0" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
-               <children>
-                  <Label text="Data de Aniversário:">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <DatePicker fx:id="pro_datePicker" />
+                  <TextField fx:id="pro_NickName" prefHeight="25.0" prefWidth="152.0" promptText="ex: Castro" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
@@ -61,7 +42,27 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="pro_numberTell" prefHeight="25.0" prefWidth="170.0" />
+                  <TextField fx:id="pro_numberTell" prefHeight="25.0" prefWidth="170.0" promptText="ex: 12 4002-8922" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Label text="Email:">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="pro_email" prefHeight="25.0" prefWidth="170.0" promptText="ex: dc.kauaemail@gmail.com" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Label text="Data de nascimento:">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="pro_datePicker" promptText="data de nascimento" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
@@ -84,13 +85,13 @@
       </VBox>
    </left>
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="501.0" prefWidth="507.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="354.0">
+            <HBox alignment="CENTER" prefHeight="91.0" prefWidth="507.0">
                <children>
-                  <Label text="Informações Opcionais">
+                  <Label prefHeight="53.0" prefWidth="367.0" text="Informações opcionais">
                      <font>
-                        <Font size="28.0" />
+                        <Font size="36.0" />
                      </font>
                   </Label>
                </children>
@@ -102,7 +103,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="pro_Relation" prefHeight="25.0" prefWidth="188.0" />
+                  <TextField fx:id="pro_Relation" prefHeight="25.0" prefWidth="188.0" promptText="ex: Pai, Mãe, Esposa, Marido..." />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
@@ -112,7 +113,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="pro_work" prefHeight="25.0" prefWidth="152.0" />
+                  <TextField fx:id="pro_work" prefHeight="25.0" prefWidth="152.0" promptText="Ads" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
@@ -122,27 +123,28 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="pro_endress" prefHeight="25.0" prefWidth="152.0" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
-               <children>
-                  <Label text="Possui alguma deficiencia?">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="pro_extra" prefHeight="25.0" prefWidth="152.0" />
+                  <TextField fx:id="pro_endress" prefHeight="25.0" prefWidth="241.0" promptText="ex: R. Daniel Daneli, 100 - Centro, Taubaté" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                <children>
                   <Button fx:id="saveContact" mnemonicParsing="false" onAction="#SaveContact" text="Salvar Contato" />
-                  <Button fx:id="ShowInfos" mnemonicParsing="false" text="Visualizar Informações" />
-                  <Button fx:id="HomeScreen" mnemonicParsing="false" onAction="#ReturnHomeScreen" text="Tela inicial" />
+                  <Button fx:id="ShowInfos" mnemonicParsing="false" onAction="#ViewInformation" text="Visualizar Informações" />
+                  <Button fx:id="HomeScreen" mnemonicParsing="false" onAction="#ReturnHomeScreen" text="Retornar" />
                </children>
             </HBox>
          </children>
       </VBox>
    </center>
+   <top>
+      <HBox alignment="CENTER" prefHeight="91.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="42.0" prefWidth="293.0" text="Adicionar Contato">
+               <font>
+                  <Font name="Arial Black" size="28.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </top>
 </BorderPane>

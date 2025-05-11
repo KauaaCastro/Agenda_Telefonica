@@ -1,0 +1,19 @@
+.Rounded-Background {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 100;
+}
+
+.trasparent {
+    -fx-background-color: RGB(0, 0, 0, 0);
+}
+
+.search-button {
+    -fx-background-color: #A9A9A9;
+    -fx-background-radius: 30;
+}
+
+.right-Bar {
+    -fx-background-color: #444444;
+}
+
+

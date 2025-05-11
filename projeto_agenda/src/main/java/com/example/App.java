@@ -10,12 +10,13 @@ import java.io.IOException;
 /**
  * JavaFX App
  */
+
 public class App extends Application {
 
     private static Scene scene;
 
     @Override
-    public void start(@SuppressWarnings("exports") Stage stage) throws IOException {
+    public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("HomeScreen"), 1280, 800);
         stage.setTitle("Tela Inicial - Debug");
         stage.setScene(scene);
@@ -36,3 +37,5 @@ public class App extends Application {
     }
 
 }
+// Para abrir a loginScreen utilize 600, 400
+// Tela inicial utilize 1280, 800
