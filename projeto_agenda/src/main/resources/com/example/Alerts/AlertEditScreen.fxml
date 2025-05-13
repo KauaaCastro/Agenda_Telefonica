@@ -8,13 +8,23 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.AddContactsController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="572.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.warnings.AlertEditController">
    <left>
       <VBox prefHeight="600.0" prefWidth="493.0" BorderPane.alignment="CENTER">
          <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Campos obrigatórios">
+                     <font>
+                        <Font name="Arial" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
                   <Label text="Nome:">
@@ -22,7 +32,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="pro_name" prefHeight="25.0" prefWidth="152.0" promptText="ex: Kauã Ricardo" />
+                  <TextField fx:id="edit_name" prefHeight="25.0" prefWidth="152.0" promptText="Editar nome" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
@@ -32,7 +42,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="pro_NickName" prefHeight="25.0" prefWidth="152.0" promptText="ex: Castro" />
+                  <TextField fx:id="edit_nickName" prefHeight="25.0" prefWidth="152.0" promptText="Editar apelido" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
@@ -42,17 +52,17 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="pro_numberTell" prefHeight="25.0" prefWidth="170.0" promptText="ex: 12 4002-8922" />
+                  <TextField fx:id="edit_numberTell" prefHeight="25.0" prefWidth="170.0" promptText="Editar número de telefone" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <Label text="Email:">
+                  <Label text="E-mail:">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="pro_email" prefHeight="25.0" prefWidth="170.0" promptText="ex: dc.kauaemail@gmail.com" />
+                  <TextField fx:id="edit_email" prefHeight="25.0" prefWidth="170.0" promptText="Editar e-mail" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
@@ -62,7 +72,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <DatePicker fx:id="pro_datePicker" promptText="data de nascimento" />
+                  <DatePicker fx:id="edit_datePicker" prefHeight="25.0" prefWidth="184.0" promptText="Editar data de nascimento" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
@@ -72,12 +82,12 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <RadioButton fx:id="gender_homem" mnemonicParsing="false" text="Masculino">
+                  <RadioButton fx:id="gender_homem" mnemonicParsing="false" text="Homem">
                      <toggleGroup>
                         <ToggleGroup fx:id="pro_gender" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="gender_mulher" mnemonicParsing="false" text="Feminino" toggleGroup="$pro_gender" />
+                  <RadioButton fx:id="gender_mulher" mnemonicParsing="false" text="Mulher" toggleGroup="$pro_gender" />
                   <RadioButton fx:id="gender_Indef" mnemonicParsing="false" text="Não Definir" toggleGroup="$pro_gender" />
                </children>
             </HBox>
@@ -87,49 +97,49 @@
    <center>
       <VBox prefHeight="501.0" prefWidth="507.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" prefHeight="91.0" prefWidth="507.0">
+            <HBox alignment="CENTER" prefHeight="72.0" prefWidth="200.0">
                <children>
-                  <Label prefHeight="53.0" prefWidth="367.0" text="Informações opcionais">
+                  <Label prefHeight="53.0" prefWidth="202.0" text="Campos opcionais">
                      <font>
-                        <Font size="36.0" />
+                        <Font size="24.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+            <HBox alignment="CENTER" prefHeight="72.0" prefWidth="200.0" spacing="10.0">
                <children>
                   <Label text="Relação Pessoal:">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="pro_Relation" prefHeight="25.0" prefWidth="188.0" promptText="ex: Pai, Mãe, Esposa, Marido..." />
+                  <TextField fx:id="edit_Relation" prefHeight="25.0" prefWidth="188.0" promptText="Editar relação pessoal" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+            <HBox alignment="CENTER" prefHeight="72.0" prefWidth="200.0" spacing="10.0">
                <children>
                   <Label text="Trabalho:">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="pro_work" prefHeight="25.0" prefWidth="152.0" promptText="Ads" />
+                  <TextField fx:id="edit_work" prefHeight="25.0" prefWidth="152.0" promptText="Editar trabalho" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+            <HBox alignment="CENTER" prefHeight="72.0" prefWidth="200.0" spacing="10.0">
                <children>
                   <Label text="Endereço:">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="pro_endress" prefHeight="25.0" prefWidth="241.0" promptText="ex: R. Daniel Daneli, 100 - Centro, Taubaté" />
+                  <TextField fx:id="edit_endress" prefHeight="25.0" prefWidth="241.0" promptText="Editar endereço " />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+            <Pane prefHeight="143.0" prefWidth="507.0" />
+            <HBox alignment="CENTER" prefHeight="76.0" prefWidth="507.0" spacing="30.0">
                <children>
-                  <Button fx:id="saveContact" mnemonicParsing="false" onAction="#SaveContact" text="Salvar Contato" />
-                  <Button fx:id="ShowInfos" mnemonicParsing="false" onAction="#ViewInformation" text="Visualizar Informações" />
+                  <Button fx:id="saveEdit" mnemonicParsing="false" onAction="#SaveModify" text="Salvar alterações" />
                   <Button fx:id="HomeScreen" mnemonicParsing="false" onAction="#ReturnHomeScreen" text="Retornar" />
                </children>
             </HBox>
@@ -137,11 +147,11 @@
       </VBox>
    </center>
    <top>
-      <HBox alignment="CENTER" prefHeight="91.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="69.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
          <children>
-            <Label prefHeight="42.0" prefWidth="293.0" text="Adicionar Contato">
+            <Label prefHeight="54.0" prefWidth="387.0" text="Edição de contatos">
                <font>
-                  <Font name="Arial Black" size="28.0" />
+                  <Font name="Arial Black" size="36.0" />
                </font>
             </Label>
          </children>

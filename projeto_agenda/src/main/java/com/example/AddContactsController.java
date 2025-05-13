@@ -90,13 +90,29 @@ public class AddContactsController {
         String endress = pro_endress.getText();
 
         if (newName.isEmpty() || nick.isEmpty() || tell.isEmpty()) {
+            Stage stage = (Stage) HomeScreen.getScene().getWindow();
+
             Alert alerta = new Alert(Alert.AlertType.ERROR);
             alerta.setTitle("Erro de Validação");
             alerta.setHeaderText("Campos obrigatórios não preenchidos");
             alerta.setContentText("Preencha nome, telefone e apelido antes de adicionar.");
-            alerta.showAndWait();
-            return; // <-- Cancela a adição
 
+            alerta.initOwner(stage);
+
+            stage.hide();
+            alerta.showAndWait();
+            stage.show();
+
+            return; // <-- Cancela a adição
+        } else {
+            Stage stage = (Stage) HomeScreen.getScene().getWindow();
+            stage.close();
+
+            Alert warning = new Alert(Alert.AlertType.INFORMATION);
+            warning.setTitle("Salvando contato...");
+            warning.setHeaderText("Contato salvo!");
+            warning.setContentText("O contato foi salvo na sua lista de contatos com os dados inseridos!");
+            warning.showAndWait();
         }
 
         ContactService contacts = new ContactService(newName, nick, gender, birthday, tell, email, relation, work,

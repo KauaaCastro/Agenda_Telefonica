@@ -1,8 +1,14 @@
 package com.example;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.List;
+
 import com.example.ContactsTable.AppState;
 import com.example.ContactsTable.ContactService;
+import com.example.warnings.AlertController;
+import com.example.warnings.AlertEditController;
+import com.example.warnings.AlertViewController;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,8 +16,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -34,9 +44,6 @@ public class PrimaryController {
 
     @FXML
     private Button pro_addContact;
-
-    @FXML
-    private Button pro_editContact;
 
     @FXML
     private Button pro_removeContacts;
@@ -77,7 +84,7 @@ public class PrimaryController {
     @FXML
     private TableColumn<ContactService, String> table1_work;
 
-    // Atualizar de maneira dinamica a lista de contatos
+    // Atualizar dinamicamente a lista de contatos
     @FXML
     public void initialize() {
 
@@ -95,6 +102,110 @@ public class PrimaryController {
         table1_relation.setCellValueFactory(new PropertyValueFactory<>("relationContact"));
 
         table_1.setItems(AppState.getContacts());
+
+        // Ativar botão direito do mouse e colocar os atalhos para as funções:
+        table_1.setRowFactory(tv -> {
+            TableRow<ContactService> row = new TableRow<>();
+
+            ContextMenu contextMenu = new ContextMenu();
+            MenuItem ShortcutView = new MenuItem("Visualizar contato");
+
+            ShortcutView.setOnAction(event -> {
+                ContactService selected = row.getItem();
+
+                if (selected != null) {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(
+                                getClass().getResource("/com/example/Alerts/AlertViewContacts(Add).fxml"));
+                        Parent root = loader.load();
+
+                        AlertViewController controller = loader.getController();
+                        controller.ShowInformations(selected);
+
+                        Stage visualization = new Stage();
+                        visualization.setTitle("Visualizar contato - atalho");
+                        visualization.setScene(new Scene(root));
+                        visualization.initModality(Modality.APPLICATION_MODAL);
+                        visualization.showAndWait();
+
+                    } catch (IOException e) {
+                        System.out.println("Erro ao inicializar o view contacts pelo atalho");
+                        e.getStackTrace();
+                    }
+                    System.out.println("Visualizar " + selected.getName());
+                }
+            });
+
+            MenuItem ShortcutEdit = new MenuItem("Editar contato");
+
+            ShortcutEdit.setOnAction(event -> {
+                ContactService selected = row.getItem();
+
+                if (selected != null) {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(
+                                getClass().getResource("/com/example/Alerts/AlertEditScreen.fxml"));
+                        Parent root = loader.load();
+
+                        AlertEditController controller = loader.getController();
+                        controller.setContactToEdit(selected);
+
+                        Stage editionOption = new Stage();
+                        editionOption.setTitle("Editar contato - atalho");
+                        editionOption.setScene(new Scene(root));
+                        editionOption.initModality(Modality.APPLICATION_MODAL);
+                        editionOption.showAndWait();
+
+                        table_1.refresh();
+
+                    } catch (IOException e) {
+                        System.out.println("Erro ao inicializar o editor de contatos pelo atalho");
+                        e.getStackTrace();
+                    }
+                    System.out.println("Editar: " + selected.getName());
+                } else {
+                    Alert warning = new Alert(Alert.AlertType.ERROR);
+
+                    warning.setTitle("Erro ao selecionar contato");
+                    warning.setHeaderText("Nenhum contato foi selecionado");
+                    warning.setContentText("Por favor, selecione novamente o contato");
+                    warning.showAndWait();
+                }
+            });
+
+            MenuItem ShortcutRemove = new MenuItem("Excluir contato");
+
+            ShortcutRemove.setOnAction(event -> {
+                ContactService selected = row.getItem();
+
+                if (selected != null) {
+                    try {
+
+                        FXMLLoader loader = new FXMLLoader(
+                                getClass().getResource("/com/example/Alerts/AlertExclude.fxml"));
+                        Parent root = loader.load();
+
+                        AlertController controller = loader.getController();
+                        controller.setDeleteContact(List.of(selected));
+
+                        Stage removeOption = new Stage();
+                        removeOption.setTitle("Remover contato - atalho");
+                        removeOption.setScene(new Scene(root));
+                        removeOption.initModality(Modality.APPLICATION_MODAL);
+                        removeOption.showAndWait();
+
+                    } catch (IOException e) {
+                        System.out.println("Ocorreu um erro ao inicializar o removedor de contatos pelo atalho");
+                        e.getStackTrace();
+                    }
+                    System.out.println("Removendo: " + selected.getName());
+                }
+            });
+
+            contextMenu.getItems().addAll(ShortcutEdit, ShortcutView, ShortcutRemove);
+            row.setContextMenu(contextMenu);
+            return row;
+        });
     }
 
     // Pesquisar contato
@@ -128,7 +239,6 @@ public class PrimaryController {
         }
     }
 
-    // Métodos de telas
     // Return home screen
     @FXML
     void goToHomeScreen(ActionEvent event) {
@@ -158,7 +268,6 @@ public class PrimaryController {
 
         loadRemoveContacts();
     }
-
 
     // Funcionamento da Dash Board
     public void loadAddContacts() {

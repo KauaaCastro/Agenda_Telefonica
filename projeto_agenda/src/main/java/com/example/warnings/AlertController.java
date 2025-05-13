@@ -60,13 +60,16 @@ public class AlertController {
 
             try {
                 Stage stage = (Stage) ExcludeConfirm.getScene().getWindow();
-                stage.close();
 
                 Alert infos = new Alert(Alert.AlertType.INFORMATION);
                 infos.setTitle("Aviso!");
                 infos.setHeaderText("Exclusão de contato");
                 infos.setContentText("Contato removido com sucesso! Retornando à tela inicial");
+                infos.initOwner(stage);
+
+                stage.hide();
                 infos.showAndWait();
+                stage.close();
 
             } catch (NullPointerException e) {
                 System.out.println("Ocorreu um erro ao exibir a confirmação da remoção do contato");

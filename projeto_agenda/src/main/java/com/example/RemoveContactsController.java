@@ -1,10 +1,12 @@
 package com.example;
 
 import java.io.IOException;
+import java.util.List;
 
 import com.example.ContactsTable.AppState;
 import com.example.ContactsTable.ContactService;
 import com.example.warnings.AlertController;
+import com.example.warnings.AlertViewController;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,6 +17,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -99,25 +103,78 @@ public class RemoveContactsController {
             }
         });
 
-        // Alteração da cor quando selecionado
-        table_1.setRowFactory(tv -> new TableRow<ContactService>() {
+        // Ativando o botão esquerdo do mouse
+        table_1.setRowFactory(tv -> {
+            TableRow<ContactService> row = new TableRow<>() {
 
-            @Override
-            protected void updateItem(ContactService item, boolean empty) {
-                super.updateItem(item, empty);
+                // Aplicar cor ao item selecionado
+                @Override
+                protected void updateItem(ContactService item, boolean empty) {
+                    super.updateItem(item, empty);
 
-                if (item == null || empty) {
-                    setStyle("");
-
-                } else if (item.getSelected()) {
-                    setStyle("-fx-background-color:rgb(228, 18, 18);");
-
-                } else {
-                    setStyle("");
+                    if (item == null || empty) {
+                        setStyle("");
+                    } else if (item.getSelected()) {
+                        setStyle("-fx-background-color: rgb(228, 18, 18);");
+                    } else {
+                        setStyle("");
+                    }
                 }
-            }
+            };
+
+            // Menu de opções com o botão esquerdo
+            ContextMenu contextMenu = new ContextMenu();
+
+            MenuItem shortcutDelete = new MenuItem("Excluir contato");
+            shortcutDelete.setOnAction(event -> {
+                ContactService selected = row.getItem();
+                if (selected != null) {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(
+                                getClass().getResource("/com/example/Alerts/AlertExclude.fxml"));
+                        Parent root = loader.load();
+                        AlertController controller = loader.getController();
+                        controller.setDeleteContact(List.of(selected));
+
+                        Stage shortRemoveOpen = new Stage();
+                        shortRemoveOpen.setTitle("Excluir contato - atalho");
+                        shortRemoveOpen.setScene(new Scene(root));
+                        shortRemoveOpen.initModality(Modality.APPLICATION_MODAL);
+                        shortRemoveOpen.showAndWait();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            MenuItem shortcutView = new MenuItem("Visualizar contato");
+            shortcutView.setOnAction(event -> {
+                ContactService selected = row.getItem();
+                if (selected != null) {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(
+                                getClass().getResource("/com/example/Alerts/AlertViewContacts(Add).fxml"));
+                        Parent root = loader.load();
+                        AlertViewController controller = loader.getController();
+                        controller.ShowInformations(selected);
+
+                        Stage viewOption = new Stage();
+                        viewOption.setTitle("Visualizar contato - atalho");
+                        viewOption.setScene(new Scene(root));
+                        viewOption.initModality(Modality.APPLICATION_MODAL);
+                        viewOption.showAndWait();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            contextMenu.getItems().addAll(shortcutDelete, shortcutView);
+            row.setContextMenu(contextMenu);
+
+            return row;
         });
-    }
+    };
 
     @FXML
     void ExcludeContact(ActionEvent event) {

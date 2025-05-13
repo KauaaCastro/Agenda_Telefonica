@@ -9,7 +9,7 @@ public class ContactService {
     private final SimpleStringProperty name = new SimpleStringProperty();
     private final SimpleStringProperty nickName = new SimpleStringProperty();
     private final SimpleStringProperty gender = new SimpleStringProperty();
-    private final SimpleStringProperty dateBirthday = new SimpleStringProperty(); // Transformar em 3 ints diferentes
+    private final SimpleStringProperty dateBirthday = new SimpleStringProperty();
     private final SimpleStringProperty tellNumber = new SimpleStringProperty();
     private final SimpleStringProperty emailContact = new SimpleStringProperty();
     private final SimpleStringProperty relationContact = new SimpleStringProperty();

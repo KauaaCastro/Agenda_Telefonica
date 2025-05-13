@@ -44,11 +44,6 @@
                   <Button fx:id="pro_visualContacts" mnemonicParsing="false" onAction="#ViewContacts" text="Visualizar contatos" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="51.0" prefWidth="275.0">
-               <children>
-                  <Button fx:id="pro_editContact" mnemonicParsing="false" onAction="#EditContacts" text="Editar contatos" />
-               </children>
-            </HBox>
       </children>
     </VBox>
   </left>
