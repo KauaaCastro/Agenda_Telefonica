@@ -17,7 +17,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class ViewContactsController {
@@ -75,6 +74,7 @@ public class ViewContactsController {
         table1_relation.setCellValueFactory(new PropertyValueFactory<>("relationContact"));
 
         table_1.setItems(AppState.getContacts());
+        table_1.refresh();
 
         // Dois cliques para selecionar
         table_1.setOnMouseClicked(event -> {
@@ -87,6 +87,7 @@ public class ViewContactsController {
                 }
             }
         });
+
     }
 
     @FXML
@@ -118,10 +119,8 @@ public class ViewContactsController {
         alertStage.setTitle("Visualizar Contato!");
         alertStage.setScene(new Scene(root));
 
-        alertStage.initModality(Modality.APPLICATION_MODAL);
-
         alertStage.showAndWait();
-
+        table_1.refresh();
     }
 
     @FXML

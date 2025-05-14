@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 //Controlador dos Alertas
@@ -47,6 +48,7 @@ public class AlertController {
         warning.setHeaderText("Nenhum contato foi removido!");
         warning.setContentText("Cancelando operação de exclusão de contato! Nenhum contato removido.");
         warning.showAndWait();
+
     }
 
     public void viewToExclude(ContactService contacts) {
@@ -65,10 +67,10 @@ public class AlertController {
                 infos.setTitle("Aviso!");
                 infos.setHeaderText("Exclusão de contato");
                 infos.setContentText("Contato removido com sucesso! Retornando à tela inicial");
-                infos.initOwner(stage);
+                infos.initModality(Modality.APPLICATION_MODAL);
+                infos.show();
 
                 stage.hide();
-                infos.showAndWait();
                 stage.close();
 
             } catch (NullPointerException e) {

@@ -72,7 +72,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <DatePicker fx:id="edit_datePicker" prefHeight="25.0" prefWidth="184.0" promptText="Editar data de nascimento" />
+                  <DatePicker fx:id="edit_datePicker" editable="false" prefHeight="25.0" prefWidth="184.0" promptText="Editar data de nascimento" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
@@ -84,10 +84,13 @@
                   </Label>
                   <RadioButton fx:id="gender_homem" mnemonicParsing="false" text="Homem">
                      <toggleGroup>
-                        <ToggleGroup fx:id="pro_gender" />
+                        <ToggleGroup fx:id="edit_gender" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="gender_mulher" mnemonicParsing="false" text="Mulher" toggleGroup="$pro_gender" />
+                  <RadioButton fx:id="gender_mulher" mnemonicParsing="false" text="Mulher">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="pro_gender" />
+                     </toggleGroup></RadioButton>
                   <RadioButton fx:id="gender_Indef" mnemonicParsing="false" text="Não Definir" toggleGroup="$pro_gender" />
                </children>
             </HBox>

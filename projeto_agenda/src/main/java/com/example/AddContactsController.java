@@ -1,6 +1,7 @@
 package com.example;
 
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 
 import com.example.ContactsTable.AppState;
 import com.example.ContactsTable.ContactService;
@@ -74,7 +75,8 @@ public class AddContactsController {
         String newName = pro_name.getText();
         String nick = pro_NickName.getText();
         String tell = pro_numberTell.getText();
-        String birthday = (pro_datePicker.getValue() != null) ? pro_datePicker.getValue().toString() : "";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String birthday = (pro_datePicker.getValue() != null) ? pro_datePicker.getValue().format(formatter) : "";
 
         String gender = "";
         RadioButton selectedRadio = (RadioButton) pro_gender.getSelectedToggle();
@@ -103,7 +105,7 @@ public class AddContactsController {
             alerta.showAndWait();
             stage.show();
 
-            return; // <-- Cancela a adição
+            return;
         } else {
             Stage stage = (Stage) HomeScreen.getScene().getWindow();
             stage.close();
@@ -183,7 +185,9 @@ public class AddContactsController {
             stage.hide();
 
             alertStage.initModality(Modality.APPLICATION_MODAL);
-            alertStage.showAndWait();
+            alertStage.show();
+
+            stage.close();
 
         } catch (IOException e) {
             System.out.println("Ocorreu um erro ao tentar exibir o alerta!");

@@ -73,12 +73,26 @@ public class AlertViewController {
         show_Relation.setText(contacts.getRelationContact());
 
         this.selectedContact = contacts;
+
     }
 
     @FXML
-    void GoToEditContacts(ActionEvent event) {
+    void GoToEditContacts(ActionEvent event) throws IOException {
+        Stage oldStage = (Stage) HomeScreen.getScene().getWindow();
 
-        // Adicionar a tela de edição de contato assim que possivel!
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/Alerts/AlertEditScreen.fxml"));
+        Parent root = loader.load();
+
+        AlertEditController controller = loader.getController();
+        controller.setContactToEdit(selectedContact);
+
+        Stage stage = new Stage();
+        stage.setTitle("Editar contato");
+        stage.setScene(new Scene(root));
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
+
+        oldStage.close();
     }
 
     @FXML
@@ -93,7 +107,7 @@ public class AlertViewController {
         alertStage.setTitle("Alerta!");
         alertStage.setScene(new Scene(root));
         alertStage.initModality(Modality.APPLICATION_MODAL);
-        alertStage.showAndWait();
+        alertStage.show();
 
         Stage currentStage = (Stage) newExcludeContact.getScene().getWindow();
         currentStage.close();
@@ -122,5 +136,6 @@ public class AlertViewController {
         show_Work.setText(work);
         show_BornDate.setText(birthday);
         show_Gender.setText(gender);
+
     }
 }

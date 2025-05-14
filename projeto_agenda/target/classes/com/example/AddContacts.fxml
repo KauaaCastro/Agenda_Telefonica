@@ -62,7 +62,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <DatePicker fx:id="pro_datePicker" promptText="data de nascimento" />
+                  <DatePicker fx:id="pro_datePicker" editable="false" promptText="data de nascimento" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">

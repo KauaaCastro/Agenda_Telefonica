@@ -69,6 +69,10 @@ public class ContactService {
         return tellNumber.get();
     }
 
+    public void setTellNumber(String tellNumber) {
+        this.tellNumber.set(tellNumber);
+    }
+
     public String getEmailContact() {
         return emailContact.get();
     }

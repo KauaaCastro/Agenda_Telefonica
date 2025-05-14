@@ -1,15 +1,15 @@
 package com.example;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.List;
-
 import com.example.ContactsTable.AppState;
 import com.example.ContactsTable.ContactService;
 import com.example.warnings.AlertController;
 import com.example.warnings.AlertEditController;
 import com.example.warnings.AlertViewController;
-
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -206,6 +206,36 @@ public class PrimaryController {
             row.setContextMenu(contextMenu);
             return row;
         });
+
+        ObservableList<ContactService> contactsList = AppState.getContacts();
+
+        FilteredList<ContactService> filteredData = new FilteredList<>(contactsList, p -> true);
+
+        pro_SearchContacts.textProperty().addListener((Observable, OldValue, NewValue) -> {
+            filteredData.setPredicate(contacts -> {
+                if (NewValue == null || NewValue.isEmpty()) {
+                    return true;
+                }
+
+                String LowerCaseFilter = NewValue.toLowerCase();
+
+                return contacts.getName().toLowerCase().contains(LowerCaseFilter)
+                        || contacts.getNickName().toLowerCase().contains(LowerCaseFilter)
+                        || contacts.getTellNumber().toLowerCase().contains(LowerCaseFilter)
+                        || contacts.getEmailContact().toLowerCase().contains(LowerCaseFilter)
+                        || contacts.getDateBirthday().toLowerCase().contains(LowerCaseFilter)
+                        || contacts.getGender().toLowerCase().contains(LowerCaseFilter)
+                        || contacts.getWorkContact().toLowerCase().contains(LowerCaseFilter)
+                        || contacts.getEndressContact().toLowerCase().contains(LowerCaseFilter)
+                        || contacts.getRelationContact().toLowerCase().contains(LowerCaseFilter);
+            });
+        });
+
+        SortedList<ContactService> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(table_1.comparatorProperty());
+
+        table_1.setItems(sortedData);
+
     }
 
     // Pesquisar contato
@@ -297,7 +327,6 @@ public class PrimaryController {
         }
     }
 
-    // Tela de visualização de contatos (apenas visualizar os dados do contato)
     @FXML
     void ViewContacts(ActionEvent event) {
         System.out.println("\033\143");
@@ -307,5 +336,5 @@ public class PrimaryController {
 
     // Criar uma lixeira temporária para os contatos deletados
 
-    // Remover vários itens selecionados ao mesmo tempo
+    // Formatação de datas de forma padronizada
 }
