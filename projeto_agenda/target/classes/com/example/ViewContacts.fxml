@@ -15,7 +15,7 @@
       <children>
         <HBox alignment="BOTTOM_CENTER" prefHeight="64.0" prefWidth="1005.0" spacing="20.0">
           <children>
-            <TextField fx:id="view_SearchContacts" layoutX="502.0" onAction="#ViewSearchContacs" prefHeight="25.0" prefWidth="233.0" promptText="Search" />
+            <TextField fx:id="view_SearchContacts" layoutX="502.0" prefHeight="25.0" prefWidth="233.0" promptText="Search" />
             <Button fx:id="View_ViewContacts" mnemonicParsing="false" onAction="#ViewContacts" text="Visualizar contato" />
           </children>
           <padding>

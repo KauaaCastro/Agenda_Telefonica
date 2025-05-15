@@ -2,6 +2,7 @@ package com.example.warnings;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import com.example.ContactsTable.ContactService;
 
@@ -71,10 +72,19 @@ public class AlertEditController {
     @FXML
     private ContactService contactToEdit;
 
+    @FXML
+    private ContactService contactOldSave;
+
     public void initialize() {
+        attOldContact(contactOldSave);
+
         if (contactToEdit != null) {
             setContactToEdit(contactToEdit);
         }
+    }
+
+    public void attOldContact(ContactService oldcontact) {
+        this.contactOldSave = oldcontact;
     }
 
     // Puxar o contato selecionado para edição e exibi-lo nos textField
@@ -89,32 +99,40 @@ public class AlertEditController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String dateStr = contacts.getDateBirthday();
 
-        if (dateStr != null && !dateStr.isEmpty()) {
-            edit_datePicker.setValue(LocalDate.parse(dateStr, formatter));
+        if (dateStr != null && !dateStr.trim().isEmpty()) {
+            try {
+                edit_datePicker.setValue(LocalDate.parse(dateStr.trim(), formatter));
+
+            } catch (DateTimeParseException e) {
+                System.out.println("Data inválida: " + dateStr);
+                edit_datePicker.setValue(null);
+
+            }
         } else {
             edit_datePicker.setValue(null);
         }
 
-        edit_work.setText(contacts.getWorkContact());
-        edit_endress.setText(contacts.getEndressContact());
-        edit_Relation.setText(contacts.getRelationContact());
-
         if (contacts.getGender() != null) {
             switch (contacts.getGender().toLowerCase()) {
-                case "homem":
-                    gender_homem.setSelected(false);
+                case "Masculino":
+                    gender_homem.setSelected(true);
                     break;
 
-                case "mulher":
-                    gender_mulher.setSelected(false);
+                case "Feminino":
+                    gender_mulher.setSelected(true);
                     break;
 
-                case "indefinido":
-                    gender_Indef.setSelected(false);
+                case "Indefinido":
+                    gender_Indef.setSelected(true);
                     break;
                 default:
                     break;
             }
+
+            edit_work.setText(contacts.getWorkContact());
+            edit_endress.setText(contacts.getEndressContact());
+            edit_Relation.setText(contacts.getRelationContact());
+
         }
 
     }
@@ -140,7 +158,7 @@ public class AlertEditController {
             stage.show();
         } else {
 
-            if (contactToEdit == null) {
+            if (contactToEdit == null || contactOldSave == null) {
                 return;
             }
 
@@ -154,14 +172,21 @@ public class AlertEditController {
 
             contactToEdit.setDateBirthday(bornDate);
 
-            RadioButton selecRadioButton = (RadioButton) edit_gender.getSelectedToggle();
-            if (selecRadioButton != null) {
-                contactToEdit.setGender(selecRadioButton.getText());
+            String gender = null;
 
+            if (gender_homem.isSelected()) {
+                gender = "Masculino";
+            } else if (gender_mulher.isSelected()) {
+                gender = "Feminino";
+            } else if (gender_Indef.isSelected()) {
+                gender = "Indefinido";
             }
+
+            contactToEdit.setGender(gender);
 
             contactToEdit.setWork(edit_work.getText());
             contactToEdit.setRelation(edit_Relation.getText());
+            contactToEdit.setEndress(edit_endress.getText());
 
             Alert warning = new Alert(AlertType.INFORMATION);
             warning.setTitle("Editando contato...");
@@ -172,7 +197,6 @@ public class AlertEditController {
 
             stage.close();
         }
-
     }
 
     @FXML

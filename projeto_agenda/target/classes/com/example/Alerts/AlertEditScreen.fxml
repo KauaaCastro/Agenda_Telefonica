@@ -82,16 +82,16 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <RadioButton fx:id="gender_homem" mnemonicParsing="false" text="Homem">
+                  <RadioButton fx:id="gender_homem" mnemonicParsing="false" text="Masculino">
                      <toggleGroup>
                         <ToggleGroup fx:id="edit_gender" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="gender_mulher" mnemonicParsing="false" text="Mulher">
+                  <RadioButton fx:id="gender_mulher" mnemonicParsing="false" text="Feminino">
                      <toggleGroup>
                         <ToggleGroup fx:id="pro_gender" />
                      </toggleGroup></RadioButton>
-                  <RadioButton fx:id="gender_Indef" mnemonicParsing="false" text="Não Definir" toggleGroup="$pro_gender" />
+                  <RadioButton fx:id="gender_Indef" mnemonicParsing="false" text="Indefinido" toggleGroup="$pro_gender" />
                </children>
             </HBox>
          </children>

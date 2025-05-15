@@ -10,6 +10,8 @@ import com.example.warnings.AlertViewController;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,12 +24,16 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class RemoveContactsController {
+
+    @FXML
+    private TextField remove_SearchContacts;
 
     @FXML
     private Button pro_exclude;
@@ -174,7 +180,45 @@ public class RemoveContactsController {
 
             return row;
         });
-    };
+
+        // Barra de pesquisa
+        ObservableList<ContactService> contactsList = AppState.getContacts();
+
+        FilteredList<ContactService> filteredData = new FilteredList<>(contactsList, p -> true);
+
+        remove_SearchContacts.textProperty().addListener((Observable, OldValue, NewValue) -> {
+            filteredData.setPredicate(contacts -> {
+                if (NewValue == null || NewValue.isEmpty()) {
+                    return true;
+                }
+
+                String lowerCaseFilter = NewValue.toLowerCase();
+
+                return (contacts.getName() != null && contacts.getName().toLowerCase().contains(lowerCaseFilter))
+                        || (contacts.getNickName() != null
+                                && contacts.getNickName().toLowerCase().contains(lowerCaseFilter))
+                        || (contacts.getTellNumber() != null
+                                && contacts.getTellNumber().toLowerCase().contains(lowerCaseFilter))
+                        || (contacts.getEmailContact() != null
+                                && contacts.getEmailContact().toLowerCase().contains(lowerCaseFilter))
+                        || (contacts.getDateBirthday() != null
+                                && contacts.getDateBirthday().toLowerCase().contains(lowerCaseFilter))
+                        || (contacts.getGender() != null
+                                && contacts.getGender().toLowerCase().contains(lowerCaseFilter))
+                        || (contacts.getWorkContact() != null
+                                && contacts.getWorkContact().toLowerCase().contains(lowerCaseFilter))
+                        || (contacts.getEndressContact() != null
+                                && contacts.getEndressContact().toLowerCase().contains(lowerCaseFilter))
+                        || (contacts.getRelationContact() != null
+                                && contacts.getRelationContact().toLowerCase().contains(lowerCaseFilter));
+            });
+        });
+
+        SortedList<ContactService> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(table_1.comparatorProperty());
+
+        table_1.setItems(sortedData);
+    }
 
     @FXML
     void ExcludeContact(ActionEvent event) {
@@ -219,10 +263,5 @@ public class RemoveContactsController {
             System.out.println();
             e.getStackTrace();
         }
-    }
-
-    @FXML
-    void SearchContacs(ActionEvent event) {
-
     }
 }

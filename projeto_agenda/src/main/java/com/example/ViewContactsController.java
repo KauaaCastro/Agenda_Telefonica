@@ -6,6 +6,9 @@ import com.example.ContactsTable.AppState;
 import com.example.ContactsTable.ContactService;
 import com.example.warnings.AlertViewController;
 
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +25,7 @@ import javafx.stage.Stage;
 public class ViewContactsController {
 
     @FXML
-    private TextField View_SearchContacts;
+    private TextField view_SearchContacts;
 
     @FXML
     private Button View_ViewContacts;
@@ -88,10 +91,43 @@ public class ViewContactsController {
             }
         });
 
-    }
+        // Barra de pesquisa
+        ObservableList<ContactService> contactsList = AppState.getContacts();
 
-    @FXML
-    void SearchContacs(ActionEvent event) {
+        FilteredList<ContactService> filteredData = new FilteredList<>(contactsList, p -> true);
+
+        view_SearchContacts.textProperty().addListener((Observable, OldValue, NewValue) -> {
+            filteredData.setPredicate(contacts -> {
+                if (NewValue == null || NewValue.isEmpty()) {
+                    return true;
+                }
+
+                String LowerCaseFilter = NewValue.toLowerCase();
+
+                return (contacts.getName() != null && contacts.getName().toLowerCase().contains(LowerCaseFilter))
+                        || (contacts.getNickName() != null
+                                && contacts.getNickName().toLowerCase().contains(LowerCaseFilter))
+                        || (contacts.getTellNumber() != null
+                                && contacts.getTellNumber().toLowerCase().contains(LowerCaseFilter))
+                        || (contacts.getEmailContact() != null
+                                && contacts.getEmailContact().toLowerCase().contains(LowerCaseFilter))
+                        || (contacts.getDateBirthday() != null
+                                && contacts.getDateBirthday().toLowerCase().contains(LowerCaseFilter))
+                        || (contacts.getGender() != null
+                                && contacts.getGender().toLowerCase().contains(LowerCaseFilter))
+                        || (contacts.getWorkContact() != null
+                                && contacts.getWorkContact().toLowerCase().contains(LowerCaseFilter))
+                        || (contacts.getEndressContact() != null
+                                && contacts.getEndressContact().toLowerCase().contains(LowerCaseFilter))
+                        || (contacts.getRelationContact() != null
+                                && contacts.getRelationContact().toLowerCase().contains(LowerCaseFilter));
+            });
+        });
+
+        SortedList<ContactService> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(table_1.comparatorProperty());
+
+        table_1.setItems(sortedData);
 
     }
 
@@ -121,10 +157,5 @@ public class ViewContactsController {
 
         alertStage.showAndWait();
         table_1.refresh();
-    }
-
-    @FXML
-    void ViewSearchContacs(ActionEvent event) {
-
     }
 }

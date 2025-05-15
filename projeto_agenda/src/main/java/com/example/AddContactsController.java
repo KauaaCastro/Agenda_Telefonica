@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 import com.example.ContactsTable.AppState;
 import com.example.ContactsTable.ContactService;
+import com.example.ContactsTable.LocalStorageManager;
 import com.example.warnings.AlertViewController;
 
 import javafx.event.ActionEvent;
@@ -68,6 +69,8 @@ public class AddContactsController {
     @FXML
     private Button saveContact;
 
+    LocalStorageManager storage = new LocalStorageManager();
+
     @FXML
     void SaveContact(ActionEvent event) {
 
@@ -120,6 +123,7 @@ public class AddContactsController {
         ContactService contacts = new ContactService(newName, nick, gender, birthday, tell, email, relation, work,
                 endress, false);
 
+        storage.LocalAddContacts(contacts);
         AppState.getContacts().add(contacts);
 
         pro_name.clear();
@@ -193,7 +197,7 @@ public class AddContactsController {
             System.out.println("Ocorreu um erro ao tentar exibir o alerta!");
             System.out.println("Código do erro: ");
             System.out.println();
-            e.getStackTrace();
+            e.printStackTrace();
         }
     }
 

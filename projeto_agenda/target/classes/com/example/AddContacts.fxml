@@ -78,7 +78,7 @@
                      </toggleGroup>
                   </RadioButton>
                   <RadioButton fx:id="gender_mulher" mnemonicParsing="false" text="Feminino" toggleGroup="$pro_gender" />
-                  <RadioButton fx:id="gender_Indef" mnemonicParsing="false" text="Não Definir" toggleGroup="$pro_gender" />
+                  <RadioButton fx:id="gender_Indef" mnemonicParsing="false" text="Indefinido" toggleGroup="$pro_gender" />
                </children>
             </HBox>
          </children>

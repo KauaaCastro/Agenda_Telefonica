@@ -1,5 +1,7 @@
 package com.example.ContactsTable;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -31,6 +33,10 @@ public class ContactService {
         this.endressContact.set(endressContact);
 
         this.selected.set(false);
+    }
+
+    public ContactService() {
+
     }
 
     public String getName() {
@@ -115,5 +121,107 @@ public class ContactService {
 
     public BooleanProperty selectedProperty() {
         return selected;
+    }
+
+    // Métodos auxiliares para executar o arquivoJson
+
+    @JsonProperty("name")
+    public String getJsonName() {
+        return getName();
+    }
+
+    @JsonProperty("name")
+    public void setJsonName(String name) {
+        setName(name);
+    }
+
+    @JsonProperty("nickName")
+    public String getJsonNickName() {
+        return getNickName();
+    }
+
+    @JsonProperty("nickName")
+    public void setJsonNickName(String nickName) {
+        setNickName(nickName);
+    }
+
+    @JsonProperty("gender")
+    public String getJsonGender() {
+        return getGender();
+    }
+
+    @JsonProperty("gender")
+    public void setJsonGender(String gender) {
+        setGender(gender);
+    }
+
+    @JsonProperty("dateBirthday")
+    public String getJsonDateBirthday() {
+        return getDateBirthday();
+    }
+
+    @JsonProperty("dateBirthday")
+    public void setJsonDateBirthday(String date) {
+        setDateBirthday(date);
+    }
+
+    @JsonProperty("tellNumber")
+    public String getJsonTellNumber() {
+        return getTellNumber();
+    }
+
+    @JsonProperty("tellNumber")
+    public void setJsonTellNumber(String tell) {
+        setTellNumber(tell);
+    }
+
+    @JsonProperty("emailContact")
+    public String getJsonEmail() {
+        return getEmailContact();
+    }
+
+    @JsonProperty("emailContact")
+    public void setJsonEmail(String email) {
+        setemail(email);
+    }
+
+    @JsonProperty("relationContact")
+    public String getJsonRelation() {
+        return getRelationContact();
+    }
+
+    @JsonProperty("relationContact")
+    public void setJsonRelation(String relation) {
+        setRelation(relation);
+    }
+
+    @JsonProperty("workContact")
+    public String getJsonWork() {
+        return getWorkContact();
+    }
+
+    @JsonProperty("workContact")
+    public void setJsonWork(String work) {
+        setWork(work);
+    }
+
+    @JsonProperty("endressContact")
+    public String getJsonEndress() {
+        return getEndressContact();
+    }
+
+    @JsonProperty("endressContact")
+    public void setJsonEndress(String endress) {
+        setEndress(endress);
+    }
+
+    @JsonProperty("selected")
+    public boolean isJsonSelected() {
+        return getSelected();
+    }
+
+    @JsonProperty("selected")
+    public void setJsonSelected(boolean selected) {
+        setSelected(selected);
     }
 }

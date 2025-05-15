@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import com.example.ContactsTable.AppState;
 import com.example.ContactsTable.ContactService;
+import com.example.ContactsTable.LocalStorageManager;
 import com.example.warnings.AlertController;
 import com.example.warnings.AlertEditController;
 import com.example.warnings.AlertViewController;
@@ -84,26 +85,68 @@ public class PrimaryController {
     @FXML
     private TableColumn<ContactService, String> table1_work;
 
+    LocalStorageManager storage = new LocalStorageManager();
+
     // Atualizar dinamicamente a lista de contatos
     @FXML
     public void initialize() {
+        LocalStorageManager manager = new LocalStorageManager();
+        List<ContactService> contatos = manager.LoadContact();
 
-        // Atualizar os campos obrigatórios
+        // Atualiza a lista central (não substitua a lista, só atualize)
+        AppState.getContacts().setAll(contatos);
+
+        // Configura colunas da tabela
         table_1Name.setCellValueFactory(new PropertyValueFactory<>("name"));
         table1_birthdayDate.setCellValueFactory(new PropertyValueFactory<>("dateBirthday"));
         table1_gender.setCellValueFactory(new PropertyValueFactory<>("gender"));
         table_1NumeroTelefone.setCellValueFactory(new PropertyValueFactory<>("tellNumber"));
         table_1Apelido.setCellValueFactory(new PropertyValueFactory<>("nickName"));
-
-        // Atualizar os campos opcionais
         table1_email.setCellValueFactory(new PropertyValueFactory<>("emailContact"));
         table1_endress.setCellValueFactory(new PropertyValueFactory<>("endressContact"));
         table1_work.setCellValueFactory(new PropertyValueFactory<>("workContact"));
         table1_relation.setCellValueFactory(new PropertyValueFactory<>("relationContact"));
 
-        table_1.setItems(AppState.getContacts());
+        // Configura filtro e busca
+        // Barra de pesquisa
+        ObservableList<ContactService> contactsList = AppState.getContacts();
 
-        // Ativar botão direito do mouse e colocar os atalhos para as funções:
+        FilteredList<ContactService> filteredData = new FilteredList<>(contactsList, p -> true);
+
+        pro_SearchContacts.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(contacts -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                return (contacts.getName() != null && contacts.getName().toLowerCase().contains(lowerCaseFilter))
+                        || (contacts.getNickName() != null
+                                && contacts.getNickName().toLowerCase().contains(lowerCaseFilter))
+                        || (contacts.getTellNumber() != null
+                                && contacts.getTellNumber().toLowerCase().contains(lowerCaseFilter))
+                        || (contacts.getEmailContact() != null
+                                && contacts.getEmailContact().toLowerCase().contains(lowerCaseFilter))
+                        || (contacts.getDateBirthday() != null
+                                && contacts.getDateBirthday().toLowerCase().contains(lowerCaseFilter))
+                        || (contacts.getGender() != null
+                                && contacts.getGender().toLowerCase().contains(lowerCaseFilter))
+                        || (contacts.getWorkContact() != null
+                                && contacts.getWorkContact().toLowerCase().contains(lowerCaseFilter))
+                        || (contacts.getEndressContact() != null
+                                && contacts.getEndressContact().toLowerCase().contains(lowerCaseFilter))
+                        || (contacts.getRelationContact() != null
+                                && contacts.getRelationContact().toLowerCase().contains(lowerCaseFilter));
+            });
+        });
+
+        SortedList<ContactService> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(table_1.comparatorProperty());
+
+        table_1.setItems(sortedData);
+
+        // Ativar botão esquerdo do mouse e colocar os atalhos para as funções:
         table_1.setRowFactory(tv -> {
             TableRow<ContactService> row = new TableRow<>();
 
@@ -142,6 +185,18 @@ public class PrimaryController {
                 ContactService selected = row.getItem();
 
                 if (selected != null) {
+                    ContactService oldcontact = new ContactService(
+                            selected.getName(),
+                            selected.getNickName(),
+                            selected.getDateBirthday(),
+                            selected.getEmailContact(),
+                            selected.getEndressContact(),
+                            selected.getGender(),
+                            selected.getRelationContact(),
+                            selected.getWorkContact(),
+                            selected.getTellNumber(),
+                            selected.selectedProperty().get());
+
                     try {
                         FXMLLoader loader = new FXMLLoader(
                                 getClass().getResource("/com/example/Alerts/AlertEditScreen.fxml"));
@@ -149,6 +204,7 @@ public class PrimaryController {
 
                         AlertEditController controller = loader.getController();
                         controller.setContactToEdit(selected);
+                        controller.attOldContact(oldcontact);
 
                         Stage editionOption = new Stage();
                         editionOption.setTitle("Editar contato - atalho");
@@ -160,7 +216,7 @@ public class PrimaryController {
 
                     } catch (IOException e) {
                         System.out.println("Erro ao inicializar o editor de contatos pelo atalho");
-                        e.getStackTrace();
+                        e.printStackTrace();
                     }
                     System.out.println("Editar: " + selected.getName());
                 } else {
@@ -206,41 +262,6 @@ public class PrimaryController {
             row.setContextMenu(contextMenu);
             return row;
         });
-
-        ObservableList<ContactService> contactsList = AppState.getContacts();
-
-        FilteredList<ContactService> filteredData = new FilteredList<>(contactsList, p -> true);
-
-        pro_SearchContacts.textProperty().addListener((Observable, OldValue, NewValue) -> {
-            filteredData.setPredicate(contacts -> {
-                if (NewValue == null || NewValue.isEmpty()) {
-                    return true;
-                }
-
-                String LowerCaseFilter = NewValue.toLowerCase();
-
-                return contacts.getName().toLowerCase().contains(LowerCaseFilter)
-                        || contacts.getNickName().toLowerCase().contains(LowerCaseFilter)
-                        || contacts.getTellNumber().toLowerCase().contains(LowerCaseFilter)
-                        || contacts.getEmailContact().toLowerCase().contains(LowerCaseFilter)
-                        || contacts.getDateBirthday().toLowerCase().contains(LowerCaseFilter)
-                        || contacts.getGender().toLowerCase().contains(LowerCaseFilter)
-                        || contacts.getWorkContact().toLowerCase().contains(LowerCaseFilter)
-                        || contacts.getEndressContact().toLowerCase().contains(LowerCaseFilter)
-                        || contacts.getRelationContact().toLowerCase().contains(LowerCaseFilter);
-            });
-        });
-
-        SortedList<ContactService> sortedData = new SortedList<>(filteredData);
-        sortedData.comparatorProperty().bind(table_1.comparatorProperty());
-
-        table_1.setItems(sortedData);
-
-    }
-
-    // Pesquisar contato
-    @FXML
-    void SearchContacs(ActionEvent event) {
 
     }
 
