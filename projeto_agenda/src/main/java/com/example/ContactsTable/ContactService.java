@@ -1,5 +1,7 @@
 package com.example.ContactsTable;
 
+import java.util.UUID;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javafx.beans.property.BooleanProperty;
@@ -8,6 +10,7 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class ContactService {
 
+    private SimpleStringProperty id = new SimpleStringProperty();
     private final SimpleStringProperty name = new SimpleStringProperty();
     private final SimpleStringProperty nickName = new SimpleStringProperty();
     private final SimpleStringProperty gender = new SimpleStringProperty();
@@ -21,7 +24,9 @@ public class ContactService {
     private final SimpleBooleanProperty selected = new SimpleBooleanProperty(false);
 
     public ContactService(String name, String nickName, String gender, String dateBirthday, String tellNumber,
-            String emailContact, String relationContact, String workContact, String endressContact, Boolean selected) {
+            String emailContact, String relationContact, String workContact, String endressContact, Boolean selected,
+            String id) {
+        this.id = new SimpleStringProperty(id != null ? id : UUID.randomUUID().toString());
         this.name.set(name);
         this.nickName.set(nickName);
         this.gender.set(gender);
@@ -35,8 +40,23 @@ public class ContactService {
         this.selected.set(false);
     }
 
+    // classe para o Json ser atualizado de maneira correta
     public ContactService() {
 
+    }
+
+    // Getters and Setters
+
+    public String getId() {
+        return id.get();
+    }
+
+    public void setId(String id) {
+        this.id.set(id);
+    }
+
+    public SimpleStringProperty idProperty() {
+        return id;
     }
 
     public String getName() {

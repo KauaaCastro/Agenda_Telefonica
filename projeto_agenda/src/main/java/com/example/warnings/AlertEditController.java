@@ -1,15 +1,21 @@
 package com.example.warnings;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Optional;
 
 import com.example.ContactsTable.ContactService;
+import com.example.ContactsTable.LocalStorageManager;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
@@ -73,23 +79,30 @@ public class AlertEditController {
     private ContactService contactToEdit;
 
     @FXML
-    private ContactService contactOldSave;
+    private ContactService oldContact;
 
     public void initialize() {
-        attOldContact(contactOldSave);
-
         if (contactToEdit != null) {
-            setContactToEdit(contactToEdit);
+            setContactToEdit(contactToEdit); // Linha 80 aprox.
         }
-    }
-
-    public void attOldContact(ContactService oldcontact) {
-        this.contactOldSave = oldcontact;
     }
 
     // Puxar o contato selecionado para edição e exibi-lo nos textField
     public void setContactToEdit(ContactService contacts) {
         this.contactToEdit = contacts;
+
+        // Cria a cópia do contato original para oldContact
+        this.oldContact = new ContactService(
+                contacts.getName(),
+                contacts.getNickName(),
+                contacts.getTellNumber(),
+                contacts.getEmailContact(),
+                contacts.getDateBirthday(),
+                contacts.getGender(),
+                contacts.getRelationContact(),
+                contacts.getWorkContact(),
+                contacts.getEndressContact(),
+                null, null);
 
         edit_name.setText(contacts.getName());
         edit_nickName.setText(contacts.getNickName());
@@ -139,26 +152,30 @@ public class AlertEditController {
 
     // função do botão de salvamento
     @FXML
-    void SaveModify(ActionEvent event) {
-        Stage stage = (Stage) HomeScreen.getScene().getWindow();
+    void SaveModify(ActionEvent event) throws IOException {
+
         String verifyName = edit_name.getText();
         String verifyNickName = edit_nickName.getText();
         String verifyNumber = edit_numberTell.getText();
 
+        Stage stage = (Stage) HomeScreen.getScene().getWindow();
         if (verifyName.isEmpty() || verifyNickName.isEmpty() || verifyNumber.isEmpty()) {
             stage.hide();
 
-            Alert warning = new Alert(AlertType.ERROR);
-            warning.setTitle("Edição cancelada!");
-            warning.setHeaderText("Ocorreu um erro ao editar o contato, há campos vazios");
-            warning.setContentText("Por favor verifique os campos: Nome, Apelido, telefone. Tente novamente!");
-            warning.initModality(Modality.APPLICATION_MODAL);
-            warning.showAndWait();
+            Platform.runLater(() -> {
+                Alert warning = new Alert(Alert.AlertType.ERROR);
+                warning.setTitle("Edição cancelada!");
+                warning.setHeaderText("Ocorreu um erro ao editar o contato, há campos vazios");
+                warning.setContentText("Por favor verifique os campos: Nome, Apelido, telefone. Tente novamente!");
+                warning.initModality(Modality.APPLICATION_MODAL);
+                warning.showAndWait();
 
-            stage.show();
+                stage.show();
+            });
+
         } else {
 
-            if (contactToEdit == null || contactOldSave == null) {
+            if (contactToEdit == null) {
                 return;
             }
 
@@ -180,13 +197,46 @@ public class AlertEditController {
                 gender = "Feminino";
             } else if (gender_Indef.isSelected()) {
                 gender = "Indefinido";
+            } else if (gender == null) {
+                Alert warning = new Alert(AlertType.CONFIRMATION);
+
+                warning.setTitle("Confirmar edição?");
+                warning.setHeaderText("O contato está sem genêro definido!");
+                warning.setContentText("Caso não seja inserido será colocado como: Indefinido");
+                warning.initModality(Modality.APPLICATION_MODAL);
+
+                warning.getButtonTypes().clear();
+                ButtonType insert = new ButtonType("Retornar e inserir", ButtonBar.ButtonData.OK_DONE);
+                ButtonType newCancel = new ButtonType("Continuar mesmo assim", ButtonBar.ButtonData.CANCEL_CLOSE);
+                warning.getButtonTypes().addAll(insert, newCancel);
+
+                Optional<ButtonType> result = warning.showAndWait();
+
+                if (result.isPresent() && result.get() != newCancel) {
+                    return;
+                }
             }
 
             contactToEdit.setGender(gender);
-
             contactToEdit.setWork(edit_work.getText());
             contactToEdit.setRelation(edit_Relation.getText());
             contactToEdit.setEndress(edit_endress.getText());
+
+            if (oldContact != null && contactToEdit != null) {
+                LocalStorageManager storage = new LocalStorageManager();
+                storage.LocalContactEdit(oldContact, contactToEdit);
+
+                System.out.println("Informações transferidas com sucesso!");
+
+                System.out.println(oldContact);
+                System.out.println(contactToEdit);
+            } else {
+                System.out.println("Ocorreu um erro ao transferir as informações");
+
+                System.out.println();
+                System.out.println(oldContact);
+                System.out.println(contactToEdit);
+            }
 
             Alert warning = new Alert(AlertType.INFORMATION);
             warning.setTitle("Editando contato...");

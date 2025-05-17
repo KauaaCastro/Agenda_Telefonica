@@ -77,7 +77,6 @@ public class ViewContactsController {
         table1_relation.setCellValueFactory(new PropertyValueFactory<>("relationContact"));
 
         table_1.setItems(AppState.getContacts());
-        table_1.refresh();
 
         // Dois cliques para selecionar
         table_1.setOnMouseClicked(event -> {
@@ -156,6 +155,5 @@ public class ViewContactsController {
         alertStage.setScene(new Scene(root));
 
         alertStage.showAndWait();
-        table_1.refresh();
     }
 }

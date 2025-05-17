@@ -88,13 +88,14 @@ public class PrimaryController {
     LocalStorageManager storage = new LocalStorageManager();
 
     // Atualizar dinamicamente a lista de contatos
+    @SuppressWarnings("null") // Remover para realizar testes em casos de erro
     @FXML
     public void initialize() {
         LocalStorageManager manager = new LocalStorageManager();
-        List<ContactService> contatos = manager.LoadContact();
+        List<ContactService> contact = manager.LoadContact();
 
         // Atualiza a lista central (não substitua a lista, só atualize)
-        AppState.getContacts().setAll(contatos);
+        AppState.getContacts().setAll(contact);
 
         // Configura colunas da tabela
         table_1Name.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -173,7 +174,7 @@ public class PrimaryController {
 
                     } catch (IOException e) {
                         System.out.println("Erro ao inicializar o view contacts pelo atalho");
-                        e.getStackTrace();
+                        e.printStackTrace();
                     }
                     System.out.println("Visualizar " + selected.getName());
                 }
@@ -185,18 +186,6 @@ public class PrimaryController {
                 ContactService selected = row.getItem();
 
                 if (selected != null) {
-                    ContactService oldcontact = new ContactService(
-                            selected.getName(),
-                            selected.getNickName(),
-                            selected.getDateBirthday(),
-                            selected.getEmailContact(),
-                            selected.getEndressContact(),
-                            selected.getGender(),
-                            selected.getRelationContact(),
-                            selected.getWorkContact(),
-                            selected.getTellNumber(),
-                            selected.selectedProperty().get());
-
                     try {
                         FXMLLoader loader = new FXMLLoader(
                                 getClass().getResource("/com/example/Alerts/AlertEditScreen.fxml"));
@@ -204,7 +193,6 @@ public class PrimaryController {
 
                         AlertEditController controller = loader.getController();
                         controller.setContactToEdit(selected);
-                        controller.attOldContact(oldcontact);
 
                         Stage editionOption = new Stage();
                         editionOption.setTitle("Editar contato - atalho");
@@ -218,8 +206,10 @@ public class PrimaryController {
                         System.out.println("Erro ao inicializar o editor de contatos pelo atalho");
                         e.printStackTrace();
                     }
-                    System.out.println("Editar: " + selected.getName());
+
                 } else {
+                    System.out.println("Editar: " + selected.getName());
+
                     Alert warning = new Alert(Alert.AlertType.ERROR);
 
                     warning.setTitle("Erro ao selecionar contato");
@@ -227,6 +217,7 @@ public class PrimaryController {
                     warning.setContentText("Por favor, selecione novamente o contato");
                     warning.showAndWait();
                 }
+
             });
 
             MenuItem ShortcutRemove = new MenuItem("Excluir contato");

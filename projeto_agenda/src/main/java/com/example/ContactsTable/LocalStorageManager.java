@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -40,8 +42,24 @@ public class LocalStorageManager {
                 return emptyList;
             }
 
+            // Carrega os dados do JSON
             List<ContactService> loadedList = mapper.readValue(file, new TypeReference<List<ContactService>>() {
             });
+
+            boolean updated = false;
+
+            // Garante que todos os contatos tenham um ID
+            for (ContactService contact : loadedList) {
+                if (contact.getId() == null || contact.getId().isEmpty()) {
+                    contact.setId(UUID.randomUUID().toString());
+                    updated = true;
+                }
+            }
+
+            // Se algum ID foi adicionado, salva de volta no JSON
+            if (updated) {
+                SaveContact(FXCollections.observableArrayList(loadedList));
+            }
 
             return FXCollections.observableArrayList(loadedList);
 
@@ -67,20 +85,42 @@ public class LocalStorageManager {
         SaveContact(contacts);
     }
 
-    public void LocalRemoveContacts(ContactService contactRemoved) {
-        contacts.remove(contactRemoved);
-        SaveContact(contacts);
+    public void LocalDeleteContacts(List<ContactService> contactsToDelete) {
+        if (contactsToDelete == null || contactsToDelete.isEmpty())
+            return;
+
+        ObservableList<ContactService> contactList = AppState.getContacts();
+
+        for (ContactService toDelete : contactsToDelete) {
+            contactList.removeIf(existing -> existing.getId().equals(toDelete.getId()));
+        }
+
+        SaveContact(contactList);
     }
 
     public void LocalContactEdit(ContactService oldContact, ContactService update) {
-        oldContact.setName(update.getName());
-        oldContact.setNickName(update.getNickName());
-        oldContact.setTellNumber(update.getTellNumber());
-        oldContact.setemail(update.getEmailContact());
-        oldContact.setDateBirthday(update.getDateBirthday());
-        oldContact.setGender(update.getGender());
-        oldContact.setRelation(update.getRelationContact());
-        oldContact.setWork(update.getWorkContact());
-        oldContact.setEndress(update.getEndressContact());
+        // Encontra o contato antigo pelo id
+        Optional<ContactService> oldContactOpt = contacts.stream()
+                .filter(c -> c.getId().equals(update.getId()))
+                .findFirst();
+
+        if (oldContactOpt.isPresent()) {
+            ContactService editContact = oldContactOpt.get();
+
+            // Atualiza os campos do contato antigo com os dados do contato atualizado
+            editContact.setName(update.getName());
+            editContact.setNickName(update.getNickName());
+            editContact.setTellNumber(update.getTellNumber());
+            editContact.setemail(update.getEmailContact());
+            editContact.setDateBirthday(update.getDateBirthday());
+            editContact.setGender(update.getGender());
+            editContact.setRelation(update.getRelationContact());
+            editContact.setWork(update.getWorkContact());
+            editContact.setEndress(update.getEndressContact());
+
+            SaveContact(contacts);
+        } else {
+            System.out.println("Contato com id " + update.getId() + " não encontrado.");
+        }
     }
 }
