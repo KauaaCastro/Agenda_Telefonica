@@ -1,0 +1,157 @@
+.Rounded-Background {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 100;
+    -fx-border-radius: 20;
+    -fx-border-color: #cccccc;
+    
+}
+
+.trasparent {
+    -fx-background-color: RGB(0, 0, 0, 0);
+}
+
+.RemoveBackgroundButton {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.sidebar-button:hover {
+    -fx-background-color: #0ea4f6;
+    -fx-text-fill: #000000;
+}
+
+.sidebar-button:pressed {
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+}
+
+.table-view .column-header {
+    -fx-background-color: white;
+    -fx-background-radius: 6 6 0 0;
+    -fx-padding: 6px 10px;
+    -fx-border-color: #040404;
+    -fx-border-width: 0 0 1 0; 
+}
+
+.context-menu {
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+}
+
+.context-menu .menu-item {
+    -fx-text-fill: #333333; 
+    -fx-padding: 6px 16px;
+    -fx-font-size: 13px;
+    -fx-background-radius: 8px;
+}
+
+.context-menu .menu-item:hover {
+    -fx-background-color: #0ea4f6; 
+    -fx-text-fill: #000000;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand    ;
+}
+
+.table-view .show-hide-columns-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 20;
+    -fx-border-color: transparent;
+    -fx-border-radius: 20;
+    -fx-padding: 4;
+}
+
+.table-view .show-hide-column-popup .menu-item {
+    -fx-background-radius: 10;
+}
+
+.search-bar {
+    -fx-background-color: white;
+    -fx-text-fill: #333;
+    -fx-font-size: 13px;
+    -fx-prompt-text-fill: #999;
+    -fx-border-radius: 20;
+    -fx-border-color: #cccccc;
+}
+
+.search-bar:focused {
+    -fx-effect: dropshadow(gaussian, #0ea4f6, 4, 0.3, 0, 1);
+}
+
+.date-picker > .text-field {
+    -fx-background-radius: 100;
+    -fx-background-color: transparent; 
+}
+
+.date-picker > .arrow-button {
+    -fx-background-radius: 100;
+}
+
+.toggle-button {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #333333;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1.5;
+    -fx-padding: 3 10 3 10;
+    -fx-font-weight: 600;
+    -fx-cursor: hand;
+    -fx-transition: all 0.2s ease;
+}
+
+.toggle-button:selected {
+    -fx-background-color: #0ea4f6;
+    -fx-text-fill: white;
+    -fx-border-color: #0a7acc;
+    -fx-effect: dropshadow(gaussian, #0a7acc80, 10, 0.5, 0, 0);
+}
+
+.toggle-button:hover {
+    -fx-background-color: #cce6fc;
+    -fx-text-fill: #0a7acc;
+}
+
+.toggle-button:pressed {
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+}
+
+.toggleCancelbutton {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #333333;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1.5;
+    -fx-padding: 3 10 3 10;
+    -fx-font-weight: 600;
+    -fx-cursor: hand;
+    -fx-transition: all 0.2s ease;
+}
+
+.toggleCancelbutton:selected {
+    -fx-background-color: #0ea4f6;
+    -fx-text-fill: white;
+    -fx-border-color: #0a7acc;
+    -fx-effect: dropshadow(gaussian, #0a7acc80, 10, 0.5, 0, 0);
+}
+
+.toggleCancelbutton:hover {
+    -fx-background-color: #ff1515c5;
+    -fx-text-fill: #ffffff;
+}
+
+.toggleCancelbutton:pressed {
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
+}
+
+.combo-box, .date-picker {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 1;
+    -fx-padding: 5 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 3, 0, 0, 2);
+}

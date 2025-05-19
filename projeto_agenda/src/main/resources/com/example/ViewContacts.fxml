@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="802.0" prefWidth="1005.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ContactsController.ViewContactsController">
+  <center>
+    <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <children>
+        <HBox alignment="BOTTOM_CENTER" prefHeight="64.0" prefWidth="1005.0" spacing="20.0">
+          <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" />
+          </padding>
+               <children>
+                  <Pane prefHeight="43.0" prefWidth="366.0">
+                     <children>
+                        <TextField fx:id="view_SearchContacts" layoutY="15.0" prefHeight="25.0" prefWidth="237.0" promptText="Search" stylesheets="@Style/Style.css">
+                           <styleClass>
+                              <String fx:value="Rounded-Background" />
+                              <String fx:value="search-bar" />
+                           </styleClass>
+                        </TextField>
+                        <Button fx:id="View_ViewContacts" layoutX="247.0" layoutY="17.0" mnemonicParsing="false" onAction="#ViewContacts" prefHeight="29.0" prefWidth="145.0" stylesheets="@Style/Style.css" text="Visualizar contato">
+                           <styleClass>
+                              <String fx:value="Rounded-Background" />
+                              <String fx:value="toggle-button" />
+                           </styleClass>
+                           <graphic>
+                              <ImageView fitHeight="19.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Style/Icons/viewContact.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <ImageView fitHeight="19.0" fitWidth="20.0" layoutX="211.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Style/Icons/Search.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children>
+        </HBox>
+        <TableView fx:id="table_1" editable="true" prefHeight="739.0" prefWidth="986.0" stylesheets="@Style/Style.css">
+          <columns>
+            <TableColumn fx:id="table_1Name" prefWidth="310.0" text="Nome">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Style/Icons/Contacts.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></TableColumn>
+            <TableColumn fx:id="table_1Apelido" prefWidth="359.0" text="Apelido">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Style/Icons/nickName.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></TableColumn>
+            <TableColumn fx:id="table_1NumeroTelefone" prefWidth="333.0" text="Número de telefone">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Style/Icons/Phone%20Directory.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></TableColumn>
+            <TableColumn fx:id="table1_gender" prefWidth="90.0" text="Genero" visible="false" />
+            <TableColumn fx:id="table1_birthdayDate" prefWidth="71.0" text="idade" visible="false" />
+            <TableColumn fx:id="table1_email" prefWidth="105.0" text="email" visible="false" />
+            <TableColumn fx:id="table1_relation" prefWidth="85.0" text="Relação" visible="false" />
+            <TableColumn fx:id="table1_work" prefWidth="127.0" text="Trabalho" visible="false" />
+            <TableColumn fx:id="table1_endress" prefWidth="199.0" text="Endereço" visible="false" />
+          </columns>
+          <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+          </columnResizePolicy>
+               <styleClass>
+                  <String fx:value="column-header" />
+                  <String fx:value="context-menu" />
+               </styleClass>
+        </TableView>
+      </children>
+    </VBox>
+  </center>
+</BorderPane>
