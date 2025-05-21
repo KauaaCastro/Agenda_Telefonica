@@ -32,7 +32,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="show_Name" prefHeight="27.0" prefWidth="295.0" stylesheets="@../Style/Style.css" underline="true">
+                  <Label fx:id="show_Name" alignment="CENTER" prefHeight="27.0" prefWidth="295.0" stylesheets="@../Style/Style.css" underline="true">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -53,7 +53,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="show_NickName" prefHeight="27.0" prefWidth="160.0" stylesheets="@../Style/Style.css" underline="true">
+                  <Label fx:id="show_NickName" alignment="CENTER" prefHeight="27.0" prefWidth="160.0" stylesheets="@../Style/Style.css" underline="true">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -74,7 +74,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="show_TellNumber" prefHeight="27.0" prefWidth="238.0" stylesheets="@../Style/Style.css" underline="true">
+                  <Label fx:id="show_TellNumber" alignment="CENTER" prefHeight="27.0" prefWidth="238.0" stylesheets="@../Style/Style.css" underline="true">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -95,7 +95,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="show_Email" prefHeight="27.0" prefWidth="300.0" stylesheets="@../Style/Style.css" underline="true">
+                  <Label fx:id="show_Email" alignment="CENTER" prefHeight="27.0" prefWidth="300.0" stylesheets="@../Style/Style.css" underline="true">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -116,7 +116,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="show_BornDate" prefHeight="27.0" prefWidth="130.0" stylesheets="@../Style/Style.css" underline="true">
+                  <Label fx:id="show_BornDate" alignment="CENTER" prefHeight="27.0" prefWidth="130.0" stylesheets="@../Style/Style.css" underline="true">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -137,7 +137,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="show_Gender" prefHeight="27.0" prefWidth="166.0" stylesheets="@../Style/Style.css" underline="true">
+                  <Label fx:id="show_Gender" alignment="CENTER" prefHeight="27.0" prefWidth="166.0" stylesheets="@../Style/Style.css" underline="true">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -176,7 +176,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="show_Work" prefHeight="27.0" prefWidth="180.0" stylesheets="@../Style/Style.css" underline="true">
+                  <Label fx:id="show_Work" alignment="CENTER" prefHeight="27.0" prefWidth="180.0" stylesheets="@../Style/Style.css" underline="true">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -197,7 +197,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="show_Endress" prefHeight="27.0" prefWidth="180.0" stylesheets="@../Style/Style.css" underline="true">
+                  <Label fx:id="show_Endress" alignment="CENTER" prefHeight="27.0" prefWidth="180.0" stylesheets="@../Style/Style.css" underline="true">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -218,7 +218,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="show_Relation" prefHeight="27.0" prefWidth="180.0" stylesheets="@../Style/Style.css" underline="true">
+                  <Label fx:id="show_Relation" alignment="CENTER" prefHeight="27.0" prefWidth="180.0" stylesheets="@../Style/Style.css" underline="true">
                      <font>
                         <Font size="18.0" />
                      </font>

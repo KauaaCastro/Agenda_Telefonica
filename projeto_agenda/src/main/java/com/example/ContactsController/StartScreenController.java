@@ -1,4 +1,4 @@
-package com.example;
+package com.example.ContactsController;
 
 import java.io.IOException;
 
@@ -23,7 +23,8 @@ public class StartScreenController {
     void StartAgenda(ActionEvent event) {
         try {
             System.out.println("Abrindo tela inicial!");
-            Parent secondView = FXMLLoader.load(getClass().getResource("/com/example/HomeScreen.fxml"));
+            Parent secondView = FXMLLoader
+                    .load(getClass().getResource("/com/example/ContactsController/HomeScreen.fxml"));
             Scene secondScene = new Scene(secondView);
 
             // Para retornar a janela para a tela inicial

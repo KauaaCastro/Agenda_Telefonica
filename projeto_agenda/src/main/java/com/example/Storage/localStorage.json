@@ -28,7 +28,7 @@
   {
     "id": "628c76f8-6d55-41ba-8eaf-00976a7b06be",
     "name": "Sofia Almeida",
-    "nickName": null,
+    "nickName": "Sofia",
     "gender": null,
     "dateBirthday": null,
     "tellNumber": "11987654321",
@@ -36,19 +36,6 @@
     "relationContact": "Amiga",
     "workContact": "Analista de Sistemas",
     "endressContact": "Rua F",
-    "selected": false
-  },
-  {
-    "id": "de11d386-b172-4c27-b1e2-d38bb0a4d6bb",
-    "name": "Lucas Costa",
-    "nickName": "Luquinhas",
-    "gender": "Masculino",
-    "dateBirthday": null,
-    "tellNumber": "11922334455",
-    "emailContact": null,
-    "relationContact": "Família",
-    "workContact": null,
-    "endressContact": "Travessa R",
     "selected": false
   },
   {
@@ -140,19 +127,6 @@
     "relationContact": "Colega",
     "workContact": null,
     "endressContact": "Avenida G",
-    "selected": false
-  },
-  {
-    "id": "b0660835-5b5e-4353-9e2d-41904a228dff",
-    "name": "Sérgio Almeida",
-    "nickName": "Serjão",
-    "gender": "Masculino",
-    "dateBirthday": null,
-    "tellNumber": "11971717171",
-    "emailContact": null,
-    "relationContact": "Amigo",
-    "workContact": "Analista de RH",
-    "endressContact": "Rua Z",
     "selected": false
   },
   {
@@ -451,6 +425,19 @@
     "emailContact": "andjnaod",
     "relationContact": "",
     "workContact": "",
+    "endressContact": "",
+    "selected": false
+  },
+  {
+    "id": "eeb93dbb-fd13-4ea8-a42f-04fbf2412832",
+    "name": "Bruno",
+    "nickName": "Brunao",
+    "gender": "Masculino",
+    "dateBirthday": "15/04/2004",
+    "tellNumber": "8581295817251",
+    "emailContact": "heyden@gmail.com",
+    "relationContact": "",
+    "workContact": "SI",
     "endressContact": "",
     "selected": false
   }

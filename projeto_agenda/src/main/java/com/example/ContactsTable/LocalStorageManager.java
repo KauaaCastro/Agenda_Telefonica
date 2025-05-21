@@ -15,7 +15,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class LocalStorageManager {
-    private static final String localStorage = "projeto_agenda/src/main/lib/localStorage.json";
+    private static final String localStorage = "projeto_agenda/src/main/java/com/example/Storage/localStorage.json";
 
     private final ObjectMapper mapper;
     private final ObservableList<ContactService> contacts;

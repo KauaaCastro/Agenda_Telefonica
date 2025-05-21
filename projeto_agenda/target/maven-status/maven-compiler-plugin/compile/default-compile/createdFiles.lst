@@ -1,0 +1,15 @@
+com\example\ContactsTable\ContactService.class
+com\example\ContactsController\AddContactsController.class
+com\example\ContactsController\RemoveContactsController.class
+com\example\ContactsController\ViewContactsController.class
+com\example\warnings\AlertEditController.class
+com\example\ContactsController\StartScreenController.class
+com\example\ContactsTable\LocalStorageManager$1.class
+com\example\ContactsTable\AppState.class
+com\example\warnings\AlertViewController.class
+com\example\warnings\AlertController.class
+module-info.class
+com\example\App.class
+com\example\ContactsTable\LocalStorageManager.class
+com\example\PrimaryController.class
+com\example\ContactsController\RemoveContactsController$1.class

@@ -1,0 +1,129 @@
+//Aqui estão alguns comando utilizados dentro do app, um arquivo somente para facilitar na hora de escrever itens e coisas que se repetem 
+como a alteração de tela, alerta, rascunhos, cntrl c de um controller para salvar codigo e assim vai, algumas anotações e aprendizagem.
+
+
+------ SE NAO SOUBER INGLES NAO ENTRE, ESTÁ TUDO EM INGLES -----------------
+
+
+
+ //Código para Abrir uma nova tela a partir de algum botão ou opção
+ 
+ try {
+            System.out.println("Abrindo tela inicial!");
+            Parent secondView = FXMLLoader.load(getClass().getResource("/com/example/HomeScreen.fxml"));
+            Scene secondScene = new Scene(secondView);
+
+            // Para retornar a janela para a tela inicial
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(secondScene);
+            currentStage.show();
+
+        } catch (IOException e) {
+            System.out.println("Ocorreu um erro ao tentar abrir a nova janela");
+            System.out.println("Código do erro: ");
+            System.out.println();
+            e.getStackTrace();
+        }
+
+----------------------------------------------------------------------------------------------------------------------
+
+// Abre o alerta ou tela como modal, ou seja, maxima prioridade impedindo o clique por FXMLLoader
+
+  try {
+  FXMLLoader loader = new
+  FXMLLoader(getClass().getResource("/com/example/Alerts/Alert.fxml"));
+  Parent root = loader.load();
+  
+  Stage alertStage = new Stage();
+  alertStage.setTitle("Alerta!");
+  alertStage.setScene(new Scene(root));
+  
+  alertStage.initModality(Modality.APPLICATION_MODAL);
+  
+  alertStage.showAndWait();
+  
+  } catch (IOException e) {
+  System.out.println("Ocorreu um erro ao tentar exibir o alerta!");
+  System.out.println("Código do erro: ");
+  System.out.println();
+  e.getStackTrace();
+  }
+ 
+------------------------------------------------------------------------------------------------------------------------
+
+// Gera um alerta de aviso 
+
+Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("Erro de Validação");
+            alerta.setHeaderText("Campos obrigatórios não preenchidos");
+            alerta.setContentText("Preencha nome, telefone e apelido antes de adicionar.");
+            alerta.showAndWait();
+            return; // <-- Cancela a adição
+
+------------------------------------------------------------------------------------------------------------------------
+
+// Fecha a página após um determinado click, ação ou etc...
+
+ Stage stage = (Stage) Alert_Ok.getScene().getWindow();
+        stage.close();
+
+------------------------------------------------------------------------------------------------------------------------
+
+// Código para remover o contato:
+
+ContactService selectedContacts = table_1.getSelectionModel().getSelectedItem();
+
+        if (selectedContacts == null) {
+            Alert warning = new Alert(Alert.AlertType.WARNING);
+            warning.setTitle("Nenhuma seleção de contato!");
+            warning.setHeaderText("Nenhum contato foi selecionado!");
+            warning.setContentText("Por favor, selecione algum contato da lista de contatos e tente novamente!");
+            warning.showAndWait();
+
+            return;
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/Alerts/AlertExclude.fxml"));
+            Parent root = loader.load();
+
+            AlertController deletContact = loader.getController();
+            deletContact.setDeleteContact(selectedContacts);
+
+            Stage alertStage = new Stage();
+            alertStage.setTitle("Alerta!");
+            alertStage.setScene(new Scene(root));
+
+            alertStage.initModality(Modality.APPLICATION_MODAL);
+
+            alertStage.showAndWait();
+
+        } catch (IOException e) {
+            System.out.println("Ocorreu um erro ao tentar exibir o alerta!");
+            System.out.println("Código do erro: ");
+            System.out.println();
+            e.getStackTrace();
+        }
+-------------------------------------------------------------------------------------------------------------------------
+ @FXML
+    public void GoToExcludeContact(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/Alerts/AlertExclude.fxml"));
+        Parent root = loader.load();
+
+        AlertController controller = loader.getController();
+        controller.viewToExclude(selectedContact);
+
+        Stage alertStage = new Stage();
+        alertStage.setTitle("Alerta!");
+        alertStage.setScene(new Scene(root));
+        alertStage.initModality(Modality.APPLICATION_MODAL);
+        alertStage.showAndWait();
+
+        Stage currentStage = (Stage) newExcludeContact.getScene().getWindow();
+        currentStage.close();
+    }
+
+-------------------------------------------------------------------------------------------------------------------------
+
+Comandos para o github: 
+

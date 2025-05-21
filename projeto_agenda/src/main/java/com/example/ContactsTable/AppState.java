@@ -18,12 +18,6 @@ public class AppState {
                 return contacts;
         }
 
-        /*
-         * public static void AddContacts(ContactService contact) {
-         * contacts.add(contact);
-         * }
-         */
-
         public static void save() {
                 localStorageManager.SaveContact(contacts);
         }
