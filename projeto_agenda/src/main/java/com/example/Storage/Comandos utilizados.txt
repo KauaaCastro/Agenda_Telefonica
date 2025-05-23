@@ -127,3 +127,76 @@ ContactService selectedContacts = table_1.getSelectionModel().getSelectedItem();
 
 Comandos para o github: 
 
+Página de código ativa: 65001
+
+C:\Users\Cricca\OneDrive\Documentos\NetBeansProjects\Agenda>git add .
+
+C:\Users\Cricca\OneDrive\Documentos\NetBeansProjects\Agenda>git commit -m "Release 9.0"
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+
+C:\Users\Cricca\OneDrive\Documentos\NetBeansProjects\Agenda>git branch -M main
+
+C:\Users\Cricca\OneDrive\Documentos\NetBeansProjects\Agenda>git push -u origin main
+Enumerating objects: 118, done.
+Counting objects: 100% (118/118), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (70/70), done.
+Writing objects: 100% (81/81), 94.09 KiB | 6.27 MiB/s, done.
+Total 81 (delta 22), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (22/22), completed with 14 local objects.
+To https://github.com/KauaaCastro/Agenda_Telefonica.git
+   906068c..4bf7494  main -> main
+branch 'main' set up to track 'origin/main'.
+
+/////////////////////////////////
+
+SortedList<ContactService> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(Table_ListTask.comparatorProperty());
+
+        Table_ListTask.setItems(sortedData);
+        
+ Table_ListTask.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                ContactService contact = Table_ListTask.getSelectionModel().getSelectedItem();
+
+                if (contact != null) {
+                    contact.setSelected(!contact.getSelected());
+                    Table_ListTask.refresh();
+                }
+
+                if (contact.getSelected()) {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(
+                                getClass().getResource("/com/example/Alerts/AlertViewContacts(Add).fxml"));
+                        Parent root = loader.load();
+
+                        AlertViewController controller = loader.getController();
+                        controller.ShowInformations(contact);
+                        Stage stage = new Stage();
+                        stage.setTitle("Seleção de contatos");
+                        stage.setScene(new Scene(root));
+                        stage.initModality(Modality.APPLICATION_MODAL);
+                        stage.show();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        System.out.println("");
+                        System.out.println("Ocorreu um erro ao visualizar contato");
+                    }
+                }
+            }
+        });
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+| Classe                                         | Para que serve?                                             | Quando usar?                                         |
+| ---------------------------------------------- | ----------------------------------------------------------- | ---------------------------------------------------- |
+| `TaskService`                                  | Representa a tarefa, com todos os seus dados.               | Sempre que quiser mostrar, criar, editar uma tarefa. |
+| `TaskContactRelation`                          | Representa o vínculo entre uma tarefa e contatos (por IDs). | Quando associar ou buscar contatos de uma tarefa.    |
+| `TaskContactState`                             | Guarda todas as relações tarefa-contato do sistema.         | Quando quiser buscar, adicionar ou excluir relações. |
+| `ContactService` (não mostrado, mas você tem)  | Representa um contato real, com nome, telefone etc.         | Quando quiser mostrar ou trabalhar com contatos.     |
+| `ContactAppState` (não mostrado, mas você tem) | Guarda todos os contatos do sistema.                        | Quando quiser buscar um contato por ID.              |

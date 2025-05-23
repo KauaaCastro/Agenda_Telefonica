@@ -1,10 +1,20 @@
 package com.example.JavaStyle;
 
 import javafx.scene.control.Button;
+import javafx.scene.text.Text;
 
 public class ManualStyle {
 
     // Estilização manual de botões
+
+    public static void TextStyle(Text text) {
+        text.setStyle(
+                "-fx-background-color: #FFFFFF; " +
+                        "-fx-background-radius: 100; " +
+                        "-fx-border-radius: 20; " +
+                        "-fx-border-color: #cccccc;");
+    }
+
     public static void ButtonDateStyle(Button bnt_Days) {
         bnt_Days.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
         bnt_Days.setStyle(

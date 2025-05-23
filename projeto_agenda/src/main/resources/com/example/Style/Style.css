@@ -165,3 +165,11 @@
     -fx-font-weight: 600; 
     -fx-cursor: hand;
 }
+
+.Rounded-BackgroundText {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-color: #cccccc;
+    
+}

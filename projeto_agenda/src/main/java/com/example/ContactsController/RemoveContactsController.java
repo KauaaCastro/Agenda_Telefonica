@@ -78,8 +78,8 @@ public class RemoveContactsController {
         LocalStorageManager manager = new LocalStorageManager();
         List<ContactService> contact = manager.LoadContact();
 
-        // Atualiza a lista central (não substitua a lista, só atualize)
         AppState.getContacts().setAll(contact);
+
         // CheckBox dentro da tableView
         table1_Selected.setCellValueFactory(new PropertyValueFactory<>("selected"));
         table1_Selected.setCellFactory(CheckBoxTableCell.forTableColumn(table1_Selected));
@@ -103,6 +103,7 @@ public class RemoveContactsController {
         table_1.setItems(AppState.getContacts());
 
         table_1.setOnMouseClicked(event -> {
+
             if (event.getClickCount() == 2) {
                 ContactService contacts = table_1.getSelectionModel().getSelectedItem();
 
@@ -138,6 +139,7 @@ public class RemoveContactsController {
             MenuItem shortcutDelete = new MenuItem("Excluir contato");
             shortcutDelete.setOnAction(event -> {
                 ContactService selected = row.getItem();
+
                 if (selected != null) {
                     try {
                         FXMLLoader loader = new FXMLLoader(
@@ -160,6 +162,7 @@ public class RemoveContactsController {
             MenuItem shortcutView = new MenuItem("Visualizar contato");
             shortcutView.setOnAction(event -> {
                 ContactService selected = row.getItem();
+
                 if (selected != null) {
                     try {
                         FXMLLoader loader = new FXMLLoader(

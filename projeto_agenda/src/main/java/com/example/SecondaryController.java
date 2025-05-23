@@ -82,6 +82,7 @@ public class SecondaryController {
         FillCalendar();
     }
 
+    @SuppressWarnings("static-access")
     @FXML
     void FillCalendar() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM yyyy");
@@ -136,12 +137,14 @@ public class SecondaryController {
 
             ListTaskController controller = loader.getController();
             LocalDate date = LocalDate.parse(newDate);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            String dateTitle = date.format(formatter);
             ObservableList<TaskService> allTasks = TaskAppState.getTasks();
 
             controller.loadTasksForDate(date, allTasks);
 
             Stage stage = new Stage();
-            stage.setTitle("Tarefas de " + date);
+            stage.setTitle(dateTitle);
             stage.setScene(new Scene(root));
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();

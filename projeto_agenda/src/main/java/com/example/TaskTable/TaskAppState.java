@@ -1,4 +1,5 @@
 package com.example.TaskTable;
+//Armazena as tarefas criadas
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

@@ -44,7 +44,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="152.0" prefWidth="500.0" spacing="10.0">
                <children>
-                  <TextArea fx:id="pro_Description" prefHeight="152.0" prefWidth="362.0" promptText="Ex: Lista de compras, lista de compromissos etc..." />
+                  <TextArea fx:id="pro_Description" prefHeight="152.0" prefWidth="362.0" promptText="Ex: Lista de compras, lista de compromissos etc..." stylesheets="@../Style/Style.css" />
                </children>
             </HBox>
             <HBox />

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="772.0" prefWidth="562.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.TaskController.SelectCnttListController">
+   <top>
+      <HBox alignment="CENTER" prefHeight="120.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="120.0" prefWidth="569.0">
+               <children>
+                  <HBox alignment="BOTTOM_CENTER" prefHeight="56.0" prefWidth="395.0">
+                     <children>
+                        <Label contentDisplay="CENTER" prefHeight="42.0" prefWidth="321.0" text="Selecionar Contatos">
+                           <font>
+                              <Font name="Arial Black" size="28.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="67.0" prefWidth="395.0" spacing="10.0">
+                     <children>
+                        <Button fx:id="view_save" mnemonicParsing="false" onAction="#view_Save" prefHeight="26.0" prefWidth="96.0" stylesheets="@../Style/Style.css" text="Salvar">
+                           <graphic>
+                              <ImageView fitHeight="18.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Style/Icons/Done.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <styleClass>
+                              <String fx:value="toggle-button" />
+                              <String fx:value="Rounded-Background" />
+                           </styleClass>
+                        </Button>
+                        <Button fx:id="view_ViewContact" mnemonicParsing="false" onAction="#ViewContactInfo" prefHeight="28.0" prefWidth="120.0" stylesheets="@../Style/Style.css" text="Visualizar">
+                           <graphic>
+                              <ImageView fitHeight="18.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Style/Icons/viewContact.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <styleClass>
+                              <String fx:value="toggle-button" />
+                              <String fx:value="Rounded-Background" />
+                           </styleClass>
+                        </Button>
+                        <Pane prefHeight="66.0" prefWidth="234.0">
+                           <children>
+                              <TextField fx:id="search_ListTask" layoutX="7.0" layoutY="19.0" prefHeight="30.0" prefWidth="214.0" promptText="Pesquisar contato" stylesheets="@../Style/Style.css">
+                                 <styleClass>
+                                    <String fx:value="search-bar" />
+                                    <String fx:value="Rounded-Background" />
+                                 </styleClass>
+                              </TextField>
+                              <ImageView fitHeight="19.0" fitWidth="20.0" layoutX="194.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Style/Icons/Search.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Button fx:id="view_Return" mnemonicParsing="false" onAction="#GoToHomeScreen" prefHeight="28.0" prefWidth="105.0" stylesheets="@../Style/Style.css" text="Retornar">
+                           <graphic>
+                              <ImageView fitHeight="18.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Style/Icons/Go%20Back.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <styleClass>
+                              <String fx:value="toggle-button" />
+                              <String fx:value="Rounded-Background" />
+                           </styleClass>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="Table_ListTask" prefHeight="652.0" prefWidth="565.0" stylesheets="@../Style/Style.css">
+               <columns>
+                  <TableColumn fx:id="table_Name" minWidth="116.0" prefWidth="152.0" text="Nome">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Style/Icons/Contacts.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></TableColumn>
+                  <TableColumn fx:id="table_NickName" minWidth="111.0" prefWidth="125.0" text="Apelido">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Style/Icons/nickName.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></TableColumn>
+                  <TableColumn fx:id="table_TellNumber" minWidth="80.0" prefWidth="159.0" text="Telefone">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Style/Icons/Phone%20Directory.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></TableColumn>
+                  <TableColumn fx:id="table_SelectContact" minWidth="64.0" prefWidth="125.0" text="Selecionado">
+                     <graphic>
+                        <ImageView fitHeight="19.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Style/Icons/TaskSelect.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
+                  </TableColumn>
+               </columns>
+               <styleClass>
+                  <String fx:value="table-view" />
+                  <String fx:value="show-hide-columns-button" />
+               </styleClass>
+            </TableView>
+         </children>
+      </HBox>
+   </center>
+</BorderPane>

@@ -260,6 +260,7 @@ public class PrimaryController {
             table_1.setOnContextMenuRequested(event -> {
                 contextMenu.show(table_1, event.getScreenX(), event.getScreenY());
             });
+
             return row;
         });
 
