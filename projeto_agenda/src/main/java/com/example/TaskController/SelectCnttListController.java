@@ -172,36 +172,7 @@ public class SelectCnttListController {
                 }
             });
 
-            MenuItem shortcutAdd = new MenuItem("Adicionar à tarefa");
-
-            shortcutAdd.setOnAction(event -> {
-                ContactService selected = row.getItem();
-
-                if (selected != null) {
-                    Alert confirmation = new Alert(AlertType.CONFIRMATION);
-                    confirmation.setTitle("Confirmar escolha");
-                    confirmation.setHeaderText("Apenas um contato selecionado!");
-                    confirmation.setContentText("Tem certeza que deseja adicionar somente um contato à tarefa?");
-
-                    confirmation.getButtonTypes().clear();
-                    ButtonType insert = new ButtonType("Sim", ButtonBar.ButtonData.OK_DONE);
-                    ButtonType newCancel = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
-                    confirmation.getButtonTypes().addAll(insert, newCancel);
-                    confirmation.initModality(Modality.APPLICATION_MODAL);
-
-                    Optional<ButtonType> result = confirmation.showAndWait();
-
-                    if (result.isPresent() && result.get() != newCancel) {
-
-                        // Adicionar aqui a função de adicionar somente 1 contato
-                        return;
-                    }
-
-                    confirmation.showAndWait();
-                }
-            });
-
-            contextMenu.getItems().addAll(shortcutAdd, shortcutView, shortcutSelect, shortcutDeselect);
+            contextMenu.getItems().addAll(shortcutView, shortcutSelect, shortcutDeselect);
             row.setContextMenu(contextMenu);
 
             return row;

@@ -82,6 +82,7 @@ public class SecondaryController {
         FillCalendar();
     }
 
+    // Preencher calendário
     @SuppressWarnings("static-access")
     @FXML
     void FillCalendar() {
@@ -129,6 +130,7 @@ public class SecondaryController {
         }
     }
 
+    // Lista de tarefas
     @FXML
     private void GoToListTask(String newDate) {
         try {
@@ -155,6 +157,7 @@ public class SecondaryController {
         }
     }
 
+    // Atualizar calendário baseado nas datas (já formatadas)
     @FXML
     void updateCalendar() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
@@ -201,7 +204,20 @@ public class SecondaryController {
     // Remover tarefas
     @FXML
     void RemoveTasks(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/TaskScreen/TaskDeleteList.fxml"));
+            Parent root = loader.load();
 
+            Stage stage = new Stage();
+            stage.setTitle("Tela de remoção");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+
+        } catch (IOException e) {
+            System.out.println();
+            e.printStackTrace();
+        }
     }
 
     // Pesquisar tarefas e meses
@@ -213,6 +229,23 @@ public class SecondaryController {
     // Visualizar Tarefas
     @FXML
     void ViewTasks(ActionEvent event) {
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/TaskScreen/ListAllTask.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("Todas as tarefas");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+
+        } catch (IOException e) {
+            System.out.println("----------------------------------------------");
+            e.printStackTrace();
+            System.out.println("Ocorreu um erro ao iniciar a lista de tarefas (global)");
+
+        }
 
     }
 

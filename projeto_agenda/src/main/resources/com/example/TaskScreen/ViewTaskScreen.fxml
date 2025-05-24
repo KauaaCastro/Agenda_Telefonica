@@ -11,6 +11,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -126,14 +127,23 @@
                   </Label>
                </children>
             </HBox>
-            <TableView fx:id="showContactTable" prefHeight="362.0" prefWidth="492.0">
+            <TableView fx:id="showContactTable" prefHeight="350.0" prefWidth="507.0">
                <columns>
                   <TableColumn fx:id="table_ShowName" prefWidth="188.0" text="Nome" />
                   <TableColumn fx:id="table_showNick" prefWidth="131.0" text="Apelido" />
                   <TableColumn fx:id="table_ShowTell" minWidth="0.0" prefWidth="187.0" text="Telefone" />
                </columns>
             </TableView>
-            <HBox alignment="CENTER" prefHeight="0.0" prefWidth="507.0" spacing="20.0">
+            <Pane>
+               <children>
+                  <Label fx:id="ShowWarning" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="509.0" textFill="RED" underline="true">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <HBox alignment="CENTER" prefHeight="32.0" prefWidth="507.0" spacing="20.0">
                <children>
                   <Button fx:id="view_description" mnemonicParsing="false" onAction="#GoToDescription" stylesheets="@../Style/Style.css" text="Descrição">
                      <styleClass>

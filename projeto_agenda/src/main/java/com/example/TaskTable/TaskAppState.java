@@ -15,4 +15,11 @@ public class TaskAppState {
     public static void addTask(TaskService task) {
         tasks.add(task);
     }
+
+    public static void RemoveTask(TaskService taskId) {
+        tasks.removeIf(task -> task.getTaskId().equals(taskId.getTaskId()));
+
+        TaskContactState.getTaskContactRelations()
+                .removeIf(relation -> relation.getTaskId().equals(taskId.getTaskId()));
+    }
 }
