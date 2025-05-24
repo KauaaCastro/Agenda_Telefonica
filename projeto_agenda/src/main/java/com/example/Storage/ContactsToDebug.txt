@@ -1,5 +1,6 @@
 // contatos no formato Json para colar no local Storage, recomendo iniciar o app pela primeira vez sem o arquivo 
 // localStorage para que o app o crie sozinho e depois copie todos os contatos e cole no arquivo Json
+//Teste
 
 
 Contatos para execução de teste: 
