@@ -13,6 +13,8 @@ import com.example.TaskTable.TaskAppState;
 import com.example.TaskTable.TaskContactRelation;
 import com.example.TaskTable.TaskContactState;
 import com.example.TaskTable.TaskService;
+import com.example.warnings.AlertExcludeTask;
+
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
@@ -152,35 +154,35 @@ public class TaskDeleteListController {
     @FXML
     void ExcludeTask(ActionEvent event) {
 
-        Alert warning = new Alert(AlertType.CONFIRMATION);
-        warning.setTitle("Excluindo tarefa");
-        warning.setHeaderText("Tem certeza que deseja excluir esta tarefa?");
-        warning.setContentText("Se excluir a tarefa, ela não poderá ser encontrada novamente...");
+        List<TaskService> selectedTasks = TaskAppState.getTasks().stream()
+                .filter(TaskService::getSelected)
+                .collect(Collectors.toList());
 
-        warning.getButtonTypes().clear();
-        ButtonType insert = new ButtonType("Confirmar e excluir", ButtonBar.ButtonData.OK_DONE);
-        ButtonType newCancel = new ButtonType("Cancelar exclusão", ButtonBar.ButtonData.CANCEL_CLOSE);
-        warning.getButtonTypes().addAll(insert, newCancel);
-
-        Optional<ButtonType> result = warning.showAndWait();
-
-        if (result.isPresent() && result.get() != newCancel) {
-            List<TaskService> selectedTasks = TaskAppState.getTasks()
-                    .stream()
-                    .filter(TaskService::getSelected)
-                    .collect(Collectors.toList());
-
-            for (TaskService task : selectedTasks) {
-                task.setSelected(false);
-                TaskAppState.RemoveTask(task);
-            }
-
-            Table_ListTask.getSelectionModel().clearSelection();
-            Table_ListTask.refresh();
-        } else {
+        if (selectedTasks.isEmpty()) {
+            System.out.println("Erro: Tarefa = null");
             return;
         }
 
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/warnings/AlertExcludeTask.fxml"));
+            Parent root = loader.load();
+
+            AlertExcludeTask controller = loader.getController();
+            controller.setTasksToDelete(selectedTasks);
+
+            Stage stage = new Stage();
+            stage.setTitle("Confirmação de exclusão");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+
+            Table_ListTask.getSelectionModel().clearSelection();
+            Table_ListTask.refresh();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Erro ao carregar a janela de confirmação de exclusão.");
+        }
     }
 
     // Exibir a tarefa ao clicar em visualizar!

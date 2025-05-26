@@ -60,6 +60,9 @@ public class ListTaskController {
 
     @FXML
     public void initialize() {
+
+        Table_ListTask.refresh();
+
         table_Name.setCellValueFactory(new PropertyValueFactory<>("taskName"));
         table_Date.setCellValueFactory(new PropertyValueFactory<>("taskDate"));
         date_Hours.setCellValueFactory(new PropertyValueFactory<>("taskTime"));

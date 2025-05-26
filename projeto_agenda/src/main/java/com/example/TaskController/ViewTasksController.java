@@ -7,6 +7,7 @@ import com.example.ContactsTable.AppState;
 import com.example.ContactsTable.ContactService;
 import com.example.TaskTable.TaskContactRelation;
 import com.example.TaskTable.TaskService;
+import com.example.warnings.AlertExcludeTask;
 import com.example.warnings.AlertViewController;
 import com.example.warnings.TaskDescriptionAlert;
 import javafx.collections.FXCollections;
@@ -67,6 +68,8 @@ public class ViewTasksController {
 
     @FXML
     private String text_Description;
+
+    private TaskService currentTask;
 
     @FXML
     void initialize() {
@@ -145,6 +148,7 @@ public class ViewTasksController {
 
     // Recebe os itens selecionados!
     public void setTask(TaskService task, TaskContactRelation relation) {
+        this.currentTask = task;
         List<String> relatedContactIds = relation.getContactId();
 
         List<ContactService> contactsFiltered = AppState.getContacts().stream()
@@ -189,11 +193,32 @@ public class ViewTasksController {
 
     @FXML
     void GoToEditTask(ActionEvent event) {
-
     }
 
     @FXML
     void GoToExcludeTask(ActionEvent event) {
+        Stage oldStage = (Stage) view_return.getScene().getWindow();
+
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/example/Alerts/ExcludeTaskConfirm.fxml"));
+            Parent root = loader.load();
+
+            AlertExcludeTask controller = loader.getController();
+            controller.setTasksToDelete(List.of(currentTask));
+
+            Stage stage = new Stage();
+            stage.setTitle("Descrição da tarefa");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            oldStage.close();
+            stage.showAndWait();
+
+        } catch (IOException e) {
+            System.out.println();
+            e.printStackTrace();
+            System.out.println("Ocorreu um erro ao carregar a tela de descrição!");
+        }
 
     }
 
