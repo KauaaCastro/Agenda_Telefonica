@@ -135,7 +135,7 @@ public class ListAllTask {
                         stage.initModality(Modality.APPLICATION_MODAL);
                         stage.show();
 
-                        stage.setOnHiding(e -> oldStage.show());
+                        stage.setOnHiding(e -> oldStage.close());
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -184,9 +184,9 @@ public class ListAllTask {
                 stage.setTitle("Seleção de contatos");
                 stage.setScene(new Scene(root));
                 stage.initModality(Modality.APPLICATION_MODAL);
-                stage.show();
+                stage.showAndWait();
 
-                stage.setOnHiding(e -> oldStage.show());
+                stage.close();
 
             } catch (IOException e) {
                 e.printStackTrace();

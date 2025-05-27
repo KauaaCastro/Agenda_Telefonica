@@ -18,7 +18,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
@@ -54,9 +53,6 @@ public class SecondaryController {
     private Button pro_RemoveTasks;
 
     @FXML
-    private TextField pro_SearchTasks;
-
-    @FXML
     private Label pro_YearDate;
 
     @FXML
@@ -70,9 +66,6 @@ public class SecondaryController {
 
     @FXML
     private Button pro_showTasks;
-
-    @FXML
-    private Button returnHomeScreen;
 
     private YearMonth currentYearMonth;
 
@@ -248,12 +241,4 @@ public class SecondaryController {
         }
 
     }
-
-    // Retornar para a homeScreen de tarefas
-    @FXML
-    void goToHomeScreen(ActionEvent event) {
-        Stage stage = (Stage) pro_Calendar.getScene().getWindow();
-        stage.close();
-    }
-
 }

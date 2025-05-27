@@ -32,9 +32,6 @@ public class AddTaskController {
     private Button SaveTask;
 
     @FXML
-    private Button ShowInfos;
-
-    @FXML
     private TextArea pro_Description;
 
     @FXML
@@ -82,6 +79,7 @@ public class AddTaskController {
         pro_hoursTime.setTextFormatter(formatter);
     }
 
+    // Salvar tarefas
     @FXML
     void SaveTask(ActionEvent event) {
         String name = pro_name.getText();
@@ -153,9 +151,9 @@ public class AddTaskController {
 
             stage.close();
         }
-
     }
 
+    // Ir para a lista de contatos selecionados
     @FXML
     void GoToSelectContact(ActionEvent event) {
         Stage oldStage = (Stage) pro_name.getScene().getWindow();
@@ -184,11 +182,7 @@ public class AddTaskController {
         }
     }
 
-    @FXML
-    void VIewTaskInfo(ActionEvent event) {
-
-    }
-
+    // Retornar
     @FXML
     void Return(ActionEvent event) {
         Stage stage = (Stage) pro_name.getScene().getWindow();

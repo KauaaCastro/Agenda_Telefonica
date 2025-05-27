@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 import com.example.ContactsTable.AppState;
 import com.example.ContactsTable.ContactService;
 import com.example.ContactsTable.LocalStorageManager;
@@ -64,17 +63,10 @@ public class SelectCnttListController {
 
     private AddTaskController addTaskController;
 
+    private EditTaskController editTaskController;
+
     @FXML
     private static ObservableList<ContactService> contacts = FXCollections.observableArrayList();
-
-    public void setAddTaskController(AddTaskController controller) {
-        this.addTaskController = controller;
-    }
-
-    @FXML
-    public static ObservableList<ContactService> getContacts() {
-        return contacts;
-    }
 
     @FXML
     public void initialize() {
@@ -89,8 +81,6 @@ public class SelectCnttListController {
         table_SelectContact.setCellValueFactory(new PropertyValueFactory<>("selected"));
 
         table_SelectContact.setCellFactory(CheckBoxTableCell.forTableColumn(table_SelectContact));
-
-        Table_ListTask.setItems(AppState.getContacts());
 
         // Barra de pesquisa
         ObservableList<ContactService> contactsList = AppState.getContacts();
@@ -179,12 +169,14 @@ public class SelectCnttListController {
         });
     }
 
+    // Botão de retorno
     @FXML
     void GoToHomeScreen(ActionEvent event) {
         Stage stage = (Stage) view_Return.getScene().getWindow();
         stage.close();
     }
 
+    // Botão de visualizar contatos
     @FXML
     void ViewContactInfo(ActionEvent event) {
         ContactService selected = Table_ListTask.getSelectionModel().getSelectedItem();
@@ -210,6 +202,7 @@ public class SelectCnttListController {
         }
     }
 
+    // Botão se salvar
     @FXML
     void view_Save(ActionEvent event) {
 
@@ -237,14 +230,41 @@ public class SelectCnttListController {
 
         } else {
             if (addTaskController != null) {
+                System.out.println("Salvo em adicionando contatos");
+
                 List<String> selectedContactIDs = selectedContact.stream().map(ContactService::getId)
                         .collect(Collectors.toList());
 
                 addTaskController.setSelectedContactIDs(selectedContactIDs);
+
+            } else if (editTaskController != null) { // Falta verificar
+                System.out.println("Salvo em editar contatos");
+
+                List<String> selectedContactIDs = selectedContact.stream().map(ContactService::getId)
+                        .collect(Collectors.toList());
+
+                editTaskController.setSelectedContactIDs(selectedContactIDs);
+
             }
+
             Stage stage = (Stage) view_save.getScene().getWindow();
             stage.close();
 
         }
+    }
+
+    // Função para adicionar os contatos em: addContacts
+    public void setAddTaskController(AddTaskController controller) {
+        this.addTaskController = controller;
+    }
+
+    @FXML
+    public static ObservableList<ContactService> getContacts() {
+        return contacts;
+    }
+
+    // Função para adicionar os contatos em EditTask
+    public void setEditTaskConroller(EditTaskController controller) {
+        this.editTaskController = controller;
     }
 }

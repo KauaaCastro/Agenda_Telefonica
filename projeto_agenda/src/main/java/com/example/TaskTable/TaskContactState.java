@@ -12,16 +12,30 @@ public class TaskContactState {
         return TaskContactRelations;
     }
 
+    // adicionar relações e tarefas
     public static void addRelation(TaskContactRelation relation) {
         TaskContactRelations.add(relation);
     }
 
+    // Remover tarefas e relações
     public static void removeRelation(TaskContactRelation relation) {
         TaskContactRelations.remove(relation);
     }
 
     public static void clearRelations() {
         TaskContactRelations.clear();
+    }
+
+    // editar informações entre contatos e tarefas
+    public static void updateRelation(TaskContactRelation updatedRelation) {
+        for (int i = 0; i < TaskContactRelations.size(); i++) {
+            if (TaskContactRelations.get(i).getTaskId().equals(updatedRelation.getTaskId())) {
+                TaskContactRelations.set(i, updatedRelation);
+                return;
+            }
+        }
+        TaskContactRelations.add(updatedRelation);
+
     }
 
     // Busca as relações através dos ids!

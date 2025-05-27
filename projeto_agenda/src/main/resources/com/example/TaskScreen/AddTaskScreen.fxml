@@ -48,7 +48,7 @@
                </children>
             </HBox>
             <HBox />
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+            <HBox alignment="CENTER" prefHeight="118.0" prefWidth="500.0" spacing="10.0">
                <children>
                   <Label text="Selecionar contatos:">
                      <font>
@@ -70,7 +70,7 @@
                   </Button>
                </children>
             </HBox>
-            <HBox alignment="BOTTOM_CENTER" prefHeight="102.0" prefWidth="500.0" spacing="20.0" styleClass="right-pane">
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="109.0" prefWidth="500.0" spacing="20.0" styleClass="right-pane">
                <children>
                   <Button fx:id="SaveTask" mnemonicParsing="false" onAction="#SaveTask" stylesheets="@../Style/Style.css" text="Salvar tarefa">
                      <styleClass>
@@ -81,19 +81,6 @@
                         <ImageView fitHeight="18.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../Style/Icons/SavedContact.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button fx:id="ShowInfos" mnemonicParsing="false" onAction="#VIewTaskInfo" stylesheets="@../Style/Style.css" text="Visualizar tarefa">
-                     <styleClass>
-                        <String fx:value="Rounded-Background" />
-                        <String fx:value="toggle-button" />
-                     </styleClass>
-                     <graphic>
-                        <ImageView fitHeight="18.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Style/Icons/viewContact.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -113,7 +100,7 @@
                   </Button>
                </children>
                <padding>
-                  <Insets bottom="27.0" />
+                  <Insets bottom="27.0" right="30.0" />
                </padding>
             </HBox>
          </children>

@@ -10,6 +10,8 @@ import com.example.ContactsTable.ContactService;
 import com.example.TaskTable.TaskContactRelation;
 import com.example.TaskTable.TaskContactState;
 import com.example.TaskTable.TaskService;
+import com.example.warnings.AlertExcludeTask;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -122,7 +124,7 @@ public class ListTaskController {
                         stage.initModality(Modality.APPLICATION_MODAL);
                         stage.show();
 
-                        stage.setOnHiding(e -> oldStage.show());
+                        stage.setOnHiding(e -> oldStage.close());
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -142,10 +144,39 @@ public class ListTaskController {
 
             shortcutView.setOnAction(event -> {
                 ShowTaskSelected(event);
-
             });
 
-            contextMenu.getItems().addAll(shortcutView);
+            MenuItem shortcutDelete = new MenuItem("Excluir tarefa");
+
+            shortcutDelete.setOnAction(event -> {
+                TaskService taskService = row.getItem();
+
+                if (taskService != null) {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(
+                                getClass().getResource("/com/example/Alerts/ExcludeTaskConfirm.fxml"));
+                        Parent root = loader.load();
+
+                        AlertExcludeTask controller = loader.getController();
+                        controller.setTasksToDelete(List.of(taskService));
+
+                        Stage stage = new Stage();
+                        stage.setTitle("Excluir contato selecionado");
+                        stage.setScene(new Scene(root));
+                        stage.initModality(Modality.APPLICATION_MODAL);
+                        stage.showAndWait();
+
+                        Table_ListTask.getItems().remove(taskService);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        System.out.println();
+                        System.out.println("Ocorre um erro ao tentar abrir a lista de selecao contatos");
+                    }
+                }
+            });
+
+            contextMenu.getItems().addAll(shortcutView, shortcutDelete);
             row.setContextMenu(contextMenu);
             return row;
         });
@@ -196,12 +227,12 @@ public class ListTaskController {
                 controller.setTask(taskService, relation);
 
                 Stage stage = new Stage();
-                stage.setTitle("Seleção de contatos");
+                stage.setTitle("Visualização de tarefa");
                 stage.setScene(new Scene(root));
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.show();
 
-                stage.setOnHiding(e -> oldStage.show());
+                stage.setOnHiding(e -> oldStage.close());
 
             } catch (IOException e) {
                 e.printStackTrace();

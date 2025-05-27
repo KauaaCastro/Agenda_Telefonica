@@ -1,6 +1,9 @@
 package com.example.TaskController;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.stream.Collectors;
 import com.example.ContactsTable.AppState;
@@ -162,7 +165,18 @@ public class ViewTasksController {
         show_eventName.setText(task.getTaskName());
         show_eventEndress.setText(task.getTaskEndress());
         show_Hoursevent.setText(task.getTaskTime());
-        show_EventDate.setText(task.getTaskDate());
+
+        try {
+            DateTimeFormatter isoFormatter = DateTimeFormatter.ISO_LOCAL_DATE;
+            DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate date = LocalDate.parse(task.getTaskDate(), isoFormatter);
+            String formattedDate = date.format(displayFormatter);
+            show_EventDate.setText(formattedDate);
+        } catch (DateTimeParseException e) {
+            e.printStackTrace();
+            System.out.println("Erro ao converter data: " + task.getTaskDate());
+            show_EventDate.setText(task.getTaskDate()); // Fallback
+        }
 
         this.text_Description = task.getTaskDescription();
     }
@@ -193,11 +207,33 @@ public class ViewTasksController {
 
     @FXML
     void GoToEditTask(ActionEvent event) {
+        Stage oldStage = (Stage) view_return.getScene().getWindow();
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/TaskScreen/TaskEdit.fxml"));
+            Parent root = loader.load();
+
+            EditTaskController controller = loader.getController();
+            controller.setTaskShow(currentTask);
+
+            Stage stage = new Stage();
+            stage.setTitle("Editar tarefa");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+
+            oldStage.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Ocorreu um erro ao abrir a tela de edição de tarefas!");
+        }
     }
 
     @FXML
     void GoToExcludeTask(ActionEvent event) {
         Stage oldStage = (Stage) view_return.getScene().getWindow();
+        oldStage.hide();
 
         try {
             FXMLLoader loader = new FXMLLoader(
@@ -208,16 +244,18 @@ public class ViewTasksController {
             controller.setTasksToDelete(List.of(currentTask));
 
             Stage stage = new Stage();
-            stage.setTitle("Descrição da tarefa");
+            stage.setTitle("Exclusão da tarefa");
             stage.setScene(new Scene(root));
             stage.initModality(Modality.APPLICATION_MODAL);
+            oldStage.hide();
+            stage.show();
+
             oldStage.close();
-            stage.showAndWait();
 
         } catch (IOException e) {
             System.out.println();
             e.printStackTrace();
-            System.out.println("Ocorreu um erro ao carregar a tela de descrição!");
+            System.out.println("Ocorreu um erro ao carregar a tela de exclusão!");
         }
 
     }
