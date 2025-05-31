@@ -26,19 +26,6 @@
     "selected": false
   },
   {
-    "id": "628c76f8-6d55-41ba-8eaf-00976a7b06be",
-    "name": "Sofia Almeida",
-    "nickName": "Sofia",
-    "gender": null,
-    "dateBirthday": null,
-    "tellNumber": "11987654321",
-    "emailContact": "sofia.a@email.com",
-    "relationContact": "Amiga",
-    "workContact": "Analista de Sistemas",
-    "endressContact": "Rua F",
-    "selected": false
-  },
-  {
     "id": "2aa03ae2-de70-4925-9752-aa9dd238b367",
     "name": "Amanda Lima",
     "nickName": "Amandinha",
@@ -403,32 +390,6 @@
     "selected": false
   },
   {
-    "id": "65b1bede-3cad-465d-a668-0f541f780bd7",
-    "name": "Kaua Ricardo de Castro Galvão",
-    "nickName": "Castro",
-    "gender": "Masculino",
-    "dateBirthday": "14/05/2006",
-    "tellNumber": "12991550372",
-    "emailContact": "dc.kauapresentes@gmail.com",
-    "relationContact": "",
-    "workContact": "",
-    "endressContact": "",
-    "selected": false
-  },
-  {
-    "id": "bcceebe9-f375-4704-9a2e-0489995e37dd",
-    "name": "vinicius",
-    "nickName": "Vinição",
-    "gender": "Masculino",
-    "dateBirthday": "01/05/2000",
-    "tellNumber": "8312093810",
-    "emailContact": "andjnaod",
-    "relationContact": "",
-    "workContact": "",
-    "endressContact": "",
-    "selected": false
-  },
-  {
     "id": "eeb93dbb-fd13-4ea8-a42f-04fbf2412832",
     "name": "Bruno",
     "nickName": "Brunao",
@@ -439,6 +400,45 @@
     "relationContact": "",
     "workContact": "SI",
     "endressContact": "",
+    "selected": false
+  },
+  {
+    "id": "14e447aa-c561-43bb-8ad5-8eec6d23dd91",
+    "name": "Kauã Ricardo ",
+    "nickName": "kaua",
+    "gender": "Masculino",
+    "dateBirthday": "17/05/2005",
+    "tellNumber": "12991550372",
+    "emailContact": "dc.kadjksabda",
+    "relationContact": "Aluno",
+    "workContact": "Programador",
+    "endressContact": "jbsajkda",
+    "selected": false
+  },
+  {
+    "id": "918562da-ee61-4ebf-862b-66a99a2d6955",
+    "name": "Vinicius",
+    "nickName": "Vinicao",
+    "gender": "Masculino",
+    "dateBirthday": "01/05/2025",
+    "tellNumber": "3215451166",
+    "emailContact": "nsajkdbskad",
+    "relationContact": "sadas",
+    "workContact": "sdaa",
+    "endressContact": "das",
+    "selected": false
+  },
+  {
+    "id": "5f335399-0088-4d3d-99c3-e36228ba6941",
+    "name": "Sofia david",
+    "nickName": "David",
+    "gender": "",
+    "dateBirthday": "01/05/2025",
+    "tellNumber": "12154512154",
+    "emailContact": "sdabsadbsakda",
+    "relationContact": "aluna",
+    "workContact": "dsadsa",
+    "endressContact": "dsadsa",
     "selected": false
   }
 ]

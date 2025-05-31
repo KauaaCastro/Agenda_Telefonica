@@ -47,13 +47,13 @@
                         </Button>
                         <Pane prefHeight="66.0" prefWidth="252.0">
                            <children>
-                              <TextField fx:id="search_ListTask" layoutY="19.0" prefHeight="30.0" prefWidth="252.0" promptText="Pesquisar contato" stylesheets="@../Style/Style.css">
+                              <TextField fx:id="search_ListTask" layoutX="-4.0" layoutY="18.0" prefHeight="30.0" prefWidth="252.0" promptText="Pesquisar contato" stylesheets="@../Style/Style.css">
                                  <styleClass>
                                     <String fx:value="search-bar" />
                                     <String fx:value="Rounded-Background" />
                                  </styleClass>
                               </TextField>
-                              <ImageView fitHeight="19.0" fitWidth="20.0" layoutX="229.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="19.0" fitWidth="20.0" layoutX="219.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../Style/Icons/Search.png" />
                                  </image>

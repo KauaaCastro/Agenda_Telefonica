@@ -19,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -71,6 +72,28 @@ public class AddContactsController {
     private Button saveContact;
 
     LocalStorageManager storage = new LocalStorageManager();
+
+    private boolean firstClick = false;
+
+    @FXML
+    void initialize() {
+        pro_numberTell.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            if (!newVal) { // perdeu o foco
+                String raw = pro_numberTell.getText().replaceAll("[^\\d]", "");
+
+                if (raw.length() == 11) {
+                    String formatted = "(" + raw.substring(0, 2) + ") " +
+                            raw.substring(2, 7) + "-" +
+                            raw.substring(7, 11);
+                    pro_numberTell.setText(formatted);
+                } else {
+
+                    System.out.println("Número inválido ou incompleto: " + raw);
+                }
+            }
+        });
+
+    }
 
     @FXML
     void SaveContact(ActionEvent event) {

@@ -172,6 +172,7 @@ public class ViewTasksController {
             LocalDate date = LocalDate.parse(task.getTaskDate(), isoFormatter);
             String formattedDate = date.format(displayFormatter);
             show_EventDate.setText(formattedDate);
+
         } catch (DateTimeParseException e) {
             e.printStackTrace();
             System.out.println("Erro ao converter data: " + task.getTaskDate());

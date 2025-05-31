@@ -33,7 +33,7 @@
                </graphic>
                <styleClass>
                   <String fx:value="Rounded-Background" />
-                  <String fx:value="toggleCancelbutton" />
+                  <String fx:value="toggle-button" />
                </styleClass></Button>
             <Pane prefHeight="100.0" prefWidth="15.0" />
             <Button fx:id="ExcludeConfirm" mnemonicParsing="false" onAction="#ConfirmationExclude" stylesheets="@../Style/Style.css" text="Sim">
@@ -46,7 +46,7 @@
                </graphic>
                <styleClass>
                   <String fx:value="Rounded-Background" />
-                  <String fx:value="toggle-button" />
+                  <String fx:value="toggleCancelbutton" />
                </styleClass></Button>
          </children>
       </HBox>

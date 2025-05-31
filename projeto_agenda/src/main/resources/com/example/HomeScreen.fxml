@@ -99,7 +99,7 @@
             <Pane prefHeight="327.0" prefWidth="254.0" />
             <HBox alignment="CENTER" prefHeight="51.0" prefWidth="275.0">
                <children>
-                  <Button fx:id="pro_visualContacts1" mnemonicParsing="false" onAction="#ViewContacts" prefHeight="30.0" prefWidth="161.0" stylesheets="@Style/Style.css" text="Ir para tela de tarefas">
+                  <Button fx:id="pro_TaskScreen" mnemonicParsing="false" onAction="#GoToTaskScreen" prefHeight="30.0" prefWidth="161.0" stylesheets="@Style/Style.css" text="Ir para tela de tarefas">
                      <graphic>
                         <ImageView fitHeight="18.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>

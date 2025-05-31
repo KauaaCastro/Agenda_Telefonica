@@ -61,18 +61,17 @@ public class SelectCnttListController {
     @FXML
     private TextField search_ListTask;
 
+    @FXML
+    private static ObservableList<ContactService> contacts = FXCollections.observableArrayList();
+
     private AddTaskController addTaskController;
 
     private EditTaskController editTaskController;
 
     @FXML
-    private static ObservableList<ContactService> contacts = FXCollections.observableArrayList();
-
-    @FXML
     public void initialize() {
         LocalStorageManager manager = new LocalStorageManager();
         List<ContactService> contacts = manager.LoadContact();
-
         AppState.getContacts().setAll(contacts);
 
         table_Name.setCellValueFactory(new PropertyValueFactory<>("name"));

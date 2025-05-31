@@ -37,6 +37,9 @@ import javafx.stage.Stage;
 public class PrimaryController {
 
     @FXML
+    private Button pro_TaskScreen;
+
+    @FXML
     private VBox dashBoard;
 
     @FXML
@@ -372,6 +375,27 @@ public class PrimaryController {
         System.out.println("\033\143");
 
         loadViewContacts();
+    }
+
+    @FXML
+    void GoToTaskScreen(ActionEvent event) {
+        try {
+            System.out.println("Abrindo tela de tarefas!");
+            Parent secondView = FXMLLoader
+                    .load(getClass().getResource("/com/example/HomeScreen(Tasks).fxml"));
+            Scene secondScene = new Scene(secondView);
+
+            // Para retornar a janela para a tela inicial
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(secondScene);
+            currentStage.show();
+
+        } catch (IOException e) {
+            System.out.println("\033\143");
+            e.printStackTrace();
+            System.out.println("Ocorreu um erro ao abrir a tela de tarefas");
+        }
+
     }
 
     // Criar uma lixeira temporária para os contatos deletados

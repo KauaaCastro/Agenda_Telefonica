@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -27,6 +28,9 @@ public class SecondaryController {
 
     @FXML
     private ColumnConstraints sunday;
+
+    @FXML
+    private Button pro_showContacts;
 
     @FXML
     private ColumnConstraints monday;
@@ -213,12 +217,6 @@ public class SecondaryController {
         }
     }
 
-    // Pesquisar tarefas e meses
-    @FXML
-    void SearchTasks(ActionEvent event) {
-
-    }
-
     // Visualizar Tarefas
     @FXML
     void ViewTasks(ActionEvent event) {
@@ -239,6 +237,26 @@ public class SecondaryController {
             System.out.println("Ocorreu um erro ao iniciar a lista de tarefas (global)");
 
         }
+    }
 
+    // Ir para a tela de contatos
+    @FXML
+    void GoToContactScreen(ActionEvent event) {
+        try {
+            System.out.println("Abrindo tela de contatos!");
+            Parent secondView = FXMLLoader
+                    .load(getClass().getResource("/com/example/HomeScreen.fxml"));
+            Scene secondScene = new Scene(secondView);
+
+            // Para retornar a janela para a tela inicial
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(secondScene);
+            currentStage.show();
+
+        } catch (IOException e) {
+            System.out.println("\033\143");
+            e.printStackTrace();
+            System.out.println("Ocorreu um erro ao abrir a tela de contatos");
+        }
     }
 }

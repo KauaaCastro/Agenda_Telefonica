@@ -43,7 +43,7 @@
                            </graphic>
                            <styleClass>
                               <String fx:value="toggle-button" />
-                              <String fx:value="Rounded-Background" />
+                              <String fx:value="toggleCancelbutton" />
                            </styleClass>
                         </Button>
                         <Button fx:id="Exclude_view" mnemonicParsing="false" onAction="#ShowTaskSelected" prefHeight="26.0" prefWidth="96.0" stylesheets="@../Style/Style.css" text="Visualizar">

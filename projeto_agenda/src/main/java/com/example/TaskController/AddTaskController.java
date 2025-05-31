@@ -51,6 +51,8 @@ public class AddTaskController {
 
     private List<String> selectedContactIds = new ArrayList<>();
 
+    private boolean firstClick = false;
+
     @FXML
     public void initialize() {
         pro_hoursTime.setText("00:00");
@@ -70,13 +72,30 @@ public class AddTaskController {
             }
 
             String formatted = raw.substring(0, 2) + ":" + raw.substring(2, 4);
+            int oldMP = change.getCaretPosition();
 
             change.setText(formatted);
             change.setRange(0, oldText.length());
+
+            // Pular os dois pontos
+            javafx.application.Platform.runLater(() -> {
+                if (oldMP == 2) {
+                    pro_hoursTime.positionCaret(3);
+                }
+            });
+
             return change;
         });
 
         pro_hoursTime.setTextFormatter(formatter);
+
+        pro_hoursTime.setOnMouseClicked(event -> {
+            if (!firstClick) {
+                pro_hoursTime.positionCaret(0);
+                this.firstClick = true;
+
+            }
+        });
     }
 
     // Salvar tarefas

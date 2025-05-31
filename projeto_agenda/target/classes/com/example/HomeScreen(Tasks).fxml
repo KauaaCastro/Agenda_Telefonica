@@ -79,7 +79,28 @@
                   </Button>
                </children>
             </HBox>
+            <VBox prefHeight="327.0" prefWidth="254.0" />
+            <HBox alignment="CENTER" prefHeight="51.0" prefWidth="275.0">
+               <children>
+                  <Button fx:id="pro_showContacts" mnemonicParsing="false" onAction="#GoToContactScreen" prefHeight="30.0" prefWidth="150.0" stylesheets="@Style/Style.css" text="Gerenciar contatos">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Style/Icons/ContactBook.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <styleClass>
+                        <String fx:value="Rounded-Background" />
+                        <String fx:value="toggle-button" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </HBox>
          </children>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
       </VBox>
    </left>
    <center>

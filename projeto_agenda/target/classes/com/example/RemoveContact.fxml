@@ -33,7 +33,7 @@
                         <Button fx:id="pro_exclude" layoutX="275.0" layoutY="14.0" mnemonicParsing="false" onAction="#ExcludeContact" prefHeight="29.0" prefWidth="145.0" stylesheets="@Style/Style.css" text="Remover contato">
                            <styleClass>
                               <String fx:value="Rounded-Background" />
-                              <String fx:value="toggle-button" />
+                              <String fx:value="toggleCancelbutton" />
                            </styleClass>
                            <graphic>
                               <ImageView fitHeight="19.0" fitWidth="20.0" layoutX="233.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">

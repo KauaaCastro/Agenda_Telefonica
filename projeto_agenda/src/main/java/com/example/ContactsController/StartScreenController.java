@@ -24,8 +24,8 @@ public class StartScreenController {
         try {
             System.out.println("Abrindo tela inicial!");
             Parent secondView = FXMLLoader
-                    .load(getClass().getResource("/com/example/ContactsController/HomeScreen.fxml"));
-            Scene secondScene = new Scene(secondView);
+                    .load(getClass().getResource("/com/example/HomeScreen.fxml"));
+            Scene secondScene = new Scene((secondView), 1280, 800);
 
             // Para retornar a janela para a tela inicial
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -43,7 +43,22 @@ public class StartScreenController {
 
     @FXML
     void StartTaskManager(ActionEvent event) {
+        try {
+            System.out.println("Abrindo tela de tarefas!");
+            Parent secondView = FXMLLoader
+                    .load(getClass().getResource("/com/example/HomeScreen(Tasks).fxml"));
+            Scene secondScene = new Scene(secondView);
 
+            // Para retornar a janela para a tela inicial
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(secondScene);
+            currentStage.show();
+
+        } catch (IOException e) {
+            System.out.println("\033\143");
+            e.printStackTrace();
+            System.out.println("Ocorreu um erro ao abrir a tela de tarefas");
+        }
     }
 
 }

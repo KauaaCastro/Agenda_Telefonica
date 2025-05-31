@@ -9,6 +9,7 @@ import java.util.List;
 import javafx.util.StringConverter;
 
 import com.example.TaskTable.TaskService;
+import com.example.ContactsTable.ContactService;
 import com.example.TaskTable.TaskContactRelation;
 import com.example.TaskTable.TaskContactState;
 
@@ -24,6 +25,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -60,15 +62,60 @@ public class EditTaskController {
 
     private List<String> selectedContactIds = new ArrayList<>();
 
+    private boolean firstClick = false;
+
     @FXML
     void initialize() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        edit_hoursTime.setText("00:00");
+
+        TextFormatter<String> hoursFormatter = new TextFormatter<>(change -> {
+            String oldText = change.getControlText();
+            String newText = change.getControlNewText();
+
+            String raw = newText.replaceAll("[^\\d]", "");
+
+            if (raw.length() > 4) {
+                raw = raw.substring(0, 4);
+            }
+
+            while (raw.length() < 4) {
+                raw = raw + "0";
+            }
+
+            String formatted = raw.substring(0, 2) + ":" + raw.substring(2, 4);
+            int oldMP = change.getCaretPosition();
+
+            change.setText(formatted);
+            change.setRange(0, oldText.length());
+
+            // Pular os dois pontos
+            javafx.application.Platform.runLater(() -> {
+                if (oldMP == 2) {
+                    edit_hoursTime.positionCaret(3);
+                }
+            });
+
+            return change;
+        });
+
+        edit_hoursTime.setTextFormatter(hoursFormatter);
+
+        edit_hoursTime.setOnMouseClicked(event -> {
+            if (!firstClick) {
+                edit_hoursTime.clear();
+                edit_hoursTime.positionCaret(0);
+                this.firstClick = true;
+
+            }
+        });
+
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         edit_EventDate.setConverter(new StringConverter<LocalDate>() {
             @Override
             public String toString(LocalDate date) {
                 if (date != null) {
-                    return formatter.format(date);
+                    return dateFormatter.format(date);
                 } else {
                     return "";
                 }
@@ -77,7 +124,7 @@ public class EditTaskController {
             @Override
             public LocalDate fromString(String string) {
                 if (string != null && !string.isEmpty()) {
-                    return LocalDate.parse(string, formatter);
+                    return LocalDate.parse(string, dateFormatter);
                 } else {
                     return null;
                 }
@@ -125,6 +172,7 @@ public class EditTaskController {
         edit_name.setText(task.getTaskName());
         edit_endress.setText(task.getTaskEndress());
         edit_hoursTime.setText(task.getTaskTime());
+        edit_Description.setText(task.getTaskDescription());
 
         // Conversão de ISO para BR
         try {
@@ -135,6 +183,7 @@ public class EditTaskController {
             e.printStackTrace();
             System.out.println("Ocorreu um erro ao tentar exibir a data");
         }
+
     }
 
     // Salvar edições
@@ -219,5 +268,4 @@ public class EditTaskController {
         System.out.println("Contatos selecionados: " + selectedContactIds);
 
     }
-
 }

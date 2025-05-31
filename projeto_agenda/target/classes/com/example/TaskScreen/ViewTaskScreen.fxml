@@ -127,7 +127,7 @@
                   </Label>
                </children>
             </HBox>
-            <TableView fx:id="showContactTable" prefHeight="350.0" prefWidth="507.0">
+            <TableView fx:id="showContactTable" prefHeight="350.0" prefWidth="507.0" stylesheets="@../Style/Style.css">
                <columns>
                   <TableColumn fx:id="table_ShowName" prefWidth="188.0" text="Nome" />
                   <TableColumn fx:id="table_showNick" prefWidth="131.0" text="Apelido" />

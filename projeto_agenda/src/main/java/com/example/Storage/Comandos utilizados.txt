@@ -1,13 +1,4 @@
-//Aqui estão alguns comando utilizados dentro do app, um arquivo somente para facilitar na hora de escrever itens e coisas que se repetem 
-como a alteração de tela, alerta, rascunhos, cntrl c de um controller para salvar codigo e assim vai, algumas anotações e aprendizagem.
 
-
------- SE NAO SOUBER INGLES NAO ENTRE, ESTÁ TUDO EM INGLES -----------------
-
-
-
- //Código para Abrir uma nova tela a partir de algum botão ou opção
- 
  try {
             System.out.println("Abrindo tela inicial!");
             Parent secondView = FXMLLoader.load(getClass().getResource("/com/example/HomeScreen.fxml"));

@@ -17,9 +17,9 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("HomeScreen(Tasks)"), 1280, 800);
+        scene = new Scene(loadFXML("HomeScreen"), 1280, 800);
 
-        stage.setTitle("Tela Inicial tarefas - debug");
+        stage.setTitle("Tela Inicial tarefas");
         stage.setScene(scene);
         stage.show();
     }
