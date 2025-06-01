@@ -58,7 +58,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="pro_numberTell" prefHeight="25.0" prefWidth="170.0" promptText="ex: 12 4002-8922" stylesheets="@Style/Style.css">
+                  <TextField fx:id="pro_numberTell" prefHeight="25.0" prefWidth="170.0" promptText="ex: 1240028922" stylesheets="@Style/Style.css">
                      <styleClass>
                         <String fx:value="Rounded-Background" />
                         <String fx:value="search-bar" />

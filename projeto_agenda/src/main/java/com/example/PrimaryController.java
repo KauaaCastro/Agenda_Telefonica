@@ -96,7 +96,7 @@ public class PrimaryController {
     LocalStorageManager storage = new LocalStorageManager();
 
     // Atualizar dinamicamente a lista de contatos
-    @SuppressWarnings("null") // Remover para realizar testes em casos de erro
+    @SuppressWarnings("null") // Remover para realização de testes!!!!!!
     @FXML
     public void initialize() {
 
@@ -271,9 +271,9 @@ public class PrimaryController {
         // Criação do menu de colunas
         ContextMenu columnMenu = new ContextMenu();
         List<TableColumn<ContactService, ?>> columns = List.of(
-                table_1Apelido, table_1Name, table_1NumeroTelefone,
-                table1_birthdayDate, table1_gender, table1_email,
-                table1_endress, table1_relation);
+                table_1Name, table_1Apelido, table_1NumeroTelefone, table1_gender,
+                table1_birthdayDate, table1_email, table1_relation, table1_work,
+                table1_endress);
 
         for (TableColumn<ContactService, ?> column : columns) {
             CheckMenuItem item = new CheckMenuItem(column.getText());

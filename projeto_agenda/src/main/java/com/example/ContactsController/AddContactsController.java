@@ -2,6 +2,7 @@ package com.example.ContactsController;
 
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
+import java.util.function.UnaryOperator;
 
 import com.example.ContactsTable.AppState;
 import com.example.ContactsTable.ContactService;
@@ -21,6 +22,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -73,12 +75,26 @@ public class AddContactsController {
 
     LocalStorageManager storage = new LocalStorageManager();
 
+    @SuppressWarnings("unused")
     private boolean firstClick = false;
 
     @FXML
     void initialize() {
+
+        @SuppressWarnings("unused")
+        UnaryOperator<TextFormatter.Change> filter = change -> {
+            String newText = change.getText();
+
+            if (newText.matches("[0-9]*")) {
+                return change;
+
+            }
+            return null;
+
+        };
+
         pro_numberTell.focusedProperty().addListener((obs, oldVal, newVal) -> {
-            if (!newVal) { // perdeu o foco
+            if (!newVal) {
                 String raw = pro_numberTell.getText().replaceAll("[^\\d]", "");
 
                 if (raw.length() == 11) {
@@ -86,13 +102,24 @@ public class AddContactsController {
                             raw.substring(2, 7) + "-" +
                             raw.substring(7, 11);
                     pro_numberTell.setText(formatted);
-                } else {
+
+                } else if (raw.length() > 0 && raw.length() < 11) {
+                    pro_numberTell.clear();
+
+                    Alert error = new Alert(AlertType.ERROR);
+                    error.setTitle("Inválido!");
+                    error.setHeaderText("Você digitou um número de telefone inválido!");
+                    error.setContentText("Digite novamente somente com números!");
+                    error.initModality(Modality.APPLICATION_MODAL);
+                    error.showAndWait();
 
                     System.out.println("Número inválido ou incompleto: " + raw);
+
+                } else if (raw.length() == 0) {
+                    pro_numberTell.clear();
                 }
             }
         });
-
     }
 
     @FXML

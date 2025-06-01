@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Optional;
+import java.util.function.UnaryOperator;
 
 import com.example.ContactsTable.ContactService;
 import com.example.ContactsTable.LocalStorageManager;
@@ -20,6 +21,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Modality;
@@ -85,6 +87,46 @@ public class AlertEditController {
         if (contactToEdit != null) {
             setContactToEdit(contactToEdit); // Linha 80 aprox.
         }
+
+        @SuppressWarnings("unused")
+        UnaryOperator<TextFormatter.Change> filter = change -> {
+            String newText = change.getText();
+
+            if (newText.matches("[0-9]*")) {
+                return change;
+
+            }
+            return null;
+
+        };
+
+        edit_numberTell.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            if (!newVal) {
+                String raw = edit_numberTell.getText().replaceAll("[^\\d]", "");
+
+                if (raw.length() == 11) {
+                    String formatted = "(" + raw.substring(0, 2) + ") " +
+                            raw.substring(2, 7) + "-" +
+                            raw.substring(7, 11);
+                    edit_numberTell.setText(formatted);
+
+                } else if (raw.length() > 0 && raw.length() < 11) {
+                    edit_numberTell.clear();
+
+                    Alert error = new Alert(AlertType.ERROR);
+                    error.setTitle("Inválido!");
+                    error.setHeaderText("Você digitou um número de telefone inválido!");
+                    error.setContentText("Digite novamente somente com números!");
+                    error.initModality(Modality.APPLICATION_MODAL);
+                    error.showAndWait();
+
+                    System.out.println("Número inválido ou incompleto: " + raw);
+
+                } else if (raw.length() == 0) {
+                    edit_numberTell.clear();
+                }
+            }
+        });
     }
 
     // Puxar o contato selecionado para edição e exibi-lo nos textField
