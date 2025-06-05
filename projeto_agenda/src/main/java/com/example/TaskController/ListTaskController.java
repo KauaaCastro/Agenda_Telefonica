@@ -5,14 +5,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
-import com.example.ContactsTable.AppState;
-import com.example.ContactsTable.ContactService;
+import com.example.ContactsTable.LocalStorageManager;
+import com.example.TaskStorageManager.TaskLSManager;
 import com.example.TaskTable.TaskContactRelation;
 import com.example.TaskTable.TaskContactState;
 import com.example.TaskTable.TaskService;
 import com.example.warnings.AlertExcludeTask;
-
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
@@ -60,14 +58,18 @@ public class ListTaskController {
     @FXML
     private FilteredList<TaskService> filteredData;
 
+    private ObservableList<TaskService> taskList;
+
+    private LocalStorageManager storageManager = new LocalStorageManager();
+
     @FXML
     public void initialize() {
-
-        Table_ListTask.refresh();
 
         table_Name.setCellValueFactory(new PropertyValueFactory<>("taskName"));
         table_Date.setCellValueFactory(new PropertyValueFactory<>("taskDate"));
         date_Hours.setCellValueFactory(new PropertyValueFactory<>("taskTime"));
+
+        Table_ListTask.setItems(taskList);
 
         // Formatação da data usando UpdateItem
         table_Date.setCellFactory(column -> new TableCell<TaskService, String>() {
@@ -89,49 +91,7 @@ public class ListTaskController {
         // Clique duplo para selecionar
         Table_ListTask.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
-                TaskService taskService = Table_ListTask.getSelectionModel().getSelectedItem();
-
-                if (taskService != null) {
-                    String taskId = taskService.getTaskId();
-
-                    // Responsavel por pegar as relaçoes cntt - tarefas
-                    ObservableList<TaskContactRelation> relations = TaskContactState.getRelationsByTaskId(taskId);
-
-                    List<String> contactIds = relations.stream() // Responsavel por resgatar os Ids dos contatos
-                            .flatMap(rel -> rel.getContactId().stream())
-                            .collect(Collectors.toList());
-
-                    @SuppressWarnings("unused")
-                    List<ContactService> relatedContacts = AppState.getContacts().stream() // Responsavel por pegar os
-                            .filter(contact -> contactIds.contains(contact.getId())) // contatos correspondentes
-                            .collect(Collectors.toList()); // ao id
-
-                    Stage oldStage = (Stage) Return.getScene().getWindow();
-                    oldStage.hide();
-
-                    try {
-                        FXMLLoader loader = new FXMLLoader(
-                                getClass().getResource("/com/example/TaskScreen/ViewTaskScreen.fxml"));
-                        Parent root = loader.load();
-
-                        ViewTasksController controller = loader.getController();
-                        TaskContactRelation relation = relations.get(0);
-                        controller.setTask(taskService, relation);
-
-                        Stage stage = new Stage();
-                        stage.setTitle("Seleção de contatos");
-                        stage.setScene(new Scene(root));
-                        stage.initModality(Modality.APPLICATION_MODAL);
-                        stage.show();
-
-                        stage.setOnHiding(e -> oldStage.close());
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        System.out.println();
-                        System.out.println("Ocorre um erro ao tentar abrir a lista de selecao contatos");
-                    }
-                }
+                ShowTaskAction();
             }
         });
 
@@ -185,61 +145,23 @@ public class ListTaskController {
 
     // Carregar as tarefas baseado nas datas
     public void loadTasksForDate(LocalDate selectedDate, ObservableList<TaskService> taskList) {
-        this.showList = taskList;
+        this.selectedDate = selectedDate;
 
-        List<TaskService> filtered = showList.stream()
+        List<TaskService> tasksFromJson = TaskLSManager.loadTasksFromJson();
+
+        List<TaskService> filteredTasks = tasksFromJson.stream()
                 .filter(task -> task.getTaskDate().equals(selectedDate.toString()))
                 .collect(Collectors.toList());
 
-        Table_ListTask.setItems(FXCollections.observableArrayList(filtered));
+        taskList.clear();
+        taskList.addAll(filteredTasks);
+        Table_ListTask.setItems(taskList);
     }
 
     // Mostrar tela de tarefa
     @FXML
     void ShowTaskSelected(ActionEvent event) {
-        TaskService taskService = Table_ListTask.getSelectionModel().getSelectedItem();
-
-        if (taskService != null) {
-            String taskId = taskService.getTaskId();
-
-            // Responsavel por pegar as relaçoes cntt - tarefas
-            ObservableList<TaskContactRelation> relations = TaskContactState.getRelationsByTaskId(taskId);
-
-            List<String> contactIds = relations.stream() // Responsavel por resgatar os Ids dos contatos
-                    .flatMap(rel -> rel.getContactId().stream())
-                    .collect(Collectors.toList());
-
-            @SuppressWarnings("unused")
-            List<ContactService> relatedContacts = AppState.getContacts().stream() // Responsavel por pegar os
-                    .filter(contact -> contactIds.contains(contact.getId())) // contatos correspondentes
-                    .collect(Collectors.toList()); // ao id
-
-            Stage oldStage = (Stage) Return.getScene().getWindow();
-            oldStage.hide();
-
-            try {
-                FXMLLoader loader = new FXMLLoader(
-                        getClass().getResource("/com/example/TaskScreen/ViewTaskScreen.fxml"));
-                Parent root = loader.load();
-
-                ViewTasksController controller = loader.getController();
-                TaskContactRelation relation = relations.get(0); // por exemplo, o primeiro da lista
-                controller.setTask(taskService, relation);
-
-                Stage stage = new Stage();
-                stage.setTitle("Visualização de tarefa");
-                stage.setScene(new Scene(root));
-                stage.initModality(Modality.APPLICATION_MODAL);
-                stage.show();
-
-                stage.setOnHiding(e -> oldStage.close());
-
-            } catch (IOException e) {
-                e.printStackTrace();
-                System.out.println();
-                System.out.println("Ocorre um erro ao tentar abrir a lista de selecao contatos");
-            }
-        }
+        ShowTaskAction();
     }
 
     // Retornar para tela anterior
@@ -248,5 +170,54 @@ public class ListTaskController {
         Stage stage = (Stage) Return.getScene().getWindow();
         stage.hide();
         stage.close();
+    }
+
+    // Lógica para usar o showtask
+    void ShowTaskAction() {
+        TaskService taskService = Table_ListTask.getSelectionModel().getSelectedItem();
+
+        if (taskService != null) {
+            TaskLSManager.loadRelationsFromJson();
+            String taskId = taskService.getTaskId();
+            ObservableList<TaskContactRelation> relations = TaskContactState.getRelationsByTaskId(taskId);
+
+            TaskContactRelation relation = null;
+
+            if (!relations.isEmpty()) {
+                relation = relations.get(0);
+
+            } else {
+                System.out.println("Nenhuma relação encontrada, seguindo sem relação.");
+
+            }
+
+            // continua normalmente
+            Stage oldStage = (Stage) Return.getScene().getWindow();
+            oldStage.hide();
+
+            try {
+                FXMLLoader loader = new FXMLLoader(
+                        getClass().getResource("/com/example/TaskScreen/ViewTaskScreen.fxml"));
+                Parent root = loader.load();
+
+                System.out.println("Relações carregadas: " + TaskContactState.getTaskContactRelations().size());
+
+                ViewTasksController controller = loader.getController();
+                controller.setTask(taskService, relation);
+
+                Stage stage = new Stage();
+                stage.setTitle("Visualizar Tarefa");
+                stage.setScene(new Scene(root));
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.show();
+
+                stage.setOnHiding(e -> oldStage.close());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("Erro ao abrir a tela de visualização da tarefa");
+            }
+
+        }
     }
 }

@@ -6,16 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class LocalStorageManager {
-    private static final String localStorage = "projeto_agenda/src/main/java/com/example/Storage/localStorage.json";
+    private static final String localStorage = "projeto_agenda/src/main/java/com/example/Storage/localContactStorage.json";
 
     private final ObjectMapper mapper;
     private final ObservableList<ContactService> contacts;

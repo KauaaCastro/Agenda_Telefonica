@@ -4,12 +4,10 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
-
 import com.example.JavaStyle.ManualStyle;
 import com.example.TaskController.ListTaskController;
 import com.example.TaskTable.TaskAppState;
 import com.example.TaskTable.TaskService;
-
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

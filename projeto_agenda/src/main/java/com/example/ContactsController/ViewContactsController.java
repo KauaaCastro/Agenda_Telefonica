@@ -1,11 +1,9 @@
 package com.example.ContactsController;
 
 import java.io.IOException;
-
 import com.example.ContactsTable.AppState;
 import com.example.ContactsTable.ContactService;
 import com.example.warnings.AlertViewController;
-
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;

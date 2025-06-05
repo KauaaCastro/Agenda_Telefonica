@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import com.example.TaskStorageManager.TaskLSManager;
 import com.example.TaskTable.TaskAppState;
 import com.example.TaskTable.TaskContactRelation;
 import com.example.TaskTable.TaskContactState;
@@ -124,24 +125,36 @@ public class AddTaskController {
 
         } else {
             String formattedDate = pro_EventDate.getValue().toString();
-            TaskService newTask = new TaskService(null, name, formattedDate, hoursTime, endress, description, false);
-
-            newTask.setTaskName(name);
-            newTask.setEndress(endress);
-            newTask.setTaskTime(hoursTime);
-            newTask.setTaskDescription(description);
-            newTask.setTaskDate(formattedDate);
+            TaskService newTask = new TaskService(
+                    null,
+                    name,
+                    formattedDate,
+                    hoursTime,
+                    endress,
+                    description,
+                    false);
 
             TaskAppState.addTask(newTask);
-            TaskContactRelation relation = new TaskContactRelation(newTask.getTaskId(), selectedContactIds);
-            TaskContactState.addRelation(relation);
+            TaskContactState.addRelation(new TaskContactRelation(newTask.getTaskId(), selectedContactIds));
 
+            try {
+                TaskLSManager storageManager = new TaskLSManager();
+                storageManager.saveTasks(new ArrayList<>(TaskAppState.getTasks()));
+                storageManager.saveOrUpdateRelation(new ArrayList<>(TaskContactState.getTaskContactRelations()));
+
+            } catch (IOException e) {
+                e.printStackTrace();
+
+            }
+
+            // Limpa os campos do formulário
             pro_name.clear();
             pro_endress.clear();
             pro_hoursTime.clear();
             pro_Description.clear();
             pro_EventDate.setValue(null);
 
+            // Fecha e exibe alerta
             Stage stage = (Stage) pro_name.getScene().getWindow();
             stage.hide();
 
@@ -152,23 +165,8 @@ public class AddTaskController {
             information.initModality(Modality.APPLICATION_MODAL);
             information.showAndWait();
 
-            System.out.println();
-            System.out.println(newTask.getTaskName());
-            System.out.println(newTask.getTaskDate());
-            System.out.println(newTask.getTaskDescription());
-            System.out.println(newTask.getTaskTime());
-            System.out.println(newTask.getTaskEndress());
-            System.out.println(newTask.getTaskId());
-            System.out.println();
-            System.out.println("Contatos selecionados IDs:");
-            for (String contactId : selectedContactIds) {
-                System.out.println(contactId);
-            }
-
-            System.out.println();
-            System.out.println(Eventdate);
-
             stage.close();
+
         }
     }
 

@@ -1,0 +1,46 @@
+[ {
+  "taskName" : "Nome",
+  "taskDate" : "2025-06-01",
+  "taskTime" : "10:10",
+  "taskEndress" : "Endereço",
+  "taskDescription" : "Descrição",
+  "selected" : false,
+  "taskId" : "f93b2cc2-33ef-41a3-898a-2f72457d8469",
+  "id" : "f93b2cc2-33ef-41a3-898a-2f72457d8469"
+}, {
+  "taskName" : "Projeto",
+  "taskDate" : "2025-06-05",
+  "taskTime" : "19:30",
+  "taskEndress" : "Juta, Unitau",
+  "taskDescription" : "Apresentação do projeto integrador durante a aula de quinta feira\nAula do: Prof Flávio",
+  "selected" : false,
+  "taskId" : "24068b9d-a6f0-4d8f-839c-56b2cb47da6d",
+  "id" : "24068b9d-a6f0-4d8f-839c-56b2cb47da6d"
+}, {
+  "taskName" : "viagem",
+  "taskDate" : "2025-07-02",
+  "taskTime" : "07:00",
+  "taskEndress" : "Rua Caúna - Martim de Sá",
+  "taskDescription" : "Ir para caragua tirar férias",
+  "selected" : false,
+  "taskId" : "cbe1a6b8-34a9-41ab-a52c-0b9e9da5b12e",
+  "id" : "cbe1a6b8-34a9-41ab-a52c-0b9e9da5b12e"
+}, {
+  "taskName" : "Enari",
+  "taskDate" : "2025-06-09",
+  "taskTime" : "19:30",
+  "taskEndress" : "Juta Unitau",
+  "taskDescription" : "Mostrar projeto agenda para o Enari",
+  "selected" : false,
+  "taskId" : "17e36c49-88bc-4e52-bd9f-4cbbdb6d9423",
+  "id" : "17e36c49-88bc-4e52-bd9f-4cbbdb6d9423"
+}, {
+  "taskName" : "Teste",
+  "taskDate" : "2025-06-03",
+  "taskTime" : "12:43",
+  "taskEndress" : "apenas teste",
+  "taskDescription" : "",
+  "selected" : false,
+  "taskId" : "05fcc61e-5917-4043-bd0a-d54329185b94",
+  "id" : "05fcc61e-5917-4043-bd0a-d54329185b94"
+} ]

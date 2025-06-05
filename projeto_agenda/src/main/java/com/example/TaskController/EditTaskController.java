@@ -7,11 +7,9 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.util.StringConverter;
-
 import com.example.TaskTable.TaskService;
 import com.example.TaskTable.TaskContactRelation;
 import com.example.TaskTable.TaskContactState;
-
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

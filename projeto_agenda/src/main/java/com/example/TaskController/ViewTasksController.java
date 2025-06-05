@@ -76,6 +76,7 @@ public class ViewTasksController {
 
     @FXML
     void initialize() {
+
         table_ShowName.setCellValueFactory(new PropertyValueFactory<>("name"));
         table_ShowTell.setCellValueFactory(new PropertyValueFactory<>("tellNumber"));
         table_showNick.setCellValueFactory(new PropertyValueFactory<>("nickName"));
@@ -146,21 +147,27 @@ public class ViewTasksController {
                 }
             }
         });
-
     }
 
     // Recebe os itens selecionados!
     public void setTask(TaskService task, TaskContactRelation relation) {
         this.currentTask = task;
-        List<String> relatedContactIds = relation.getContactId();
+
+        List<String> relatedContactIds;
+
+        if (relation != null && relation.getContactId() != null) {
+            relatedContactIds = relation.getContactId();
+
+        } else {
+            relatedContactIds = List.of();
+
+        }
 
         List<ContactService> contactsFiltered = AppState.getContacts().stream()
                 .filter(c -> relatedContactIds.contains(c.getId()))
                 .collect(Collectors.toList());
 
         ObservableList<ContactService> observableFiltered = FXCollections.observableArrayList(contactsFiltered);
-
-        showContactTable.setItems(observableFiltered);
 
         show_eventName.setText(task.getTaskName());
         show_eventEndress.setText(task.getTaskEndress());
@@ -176,10 +183,11 @@ public class ViewTasksController {
         } catch (DateTimeParseException e) {
             e.printStackTrace();
             System.out.println("Erro ao converter data: " + task.getTaskDate());
-            show_EventDate.setText(task.getTaskDate()); // Fallback
+            show_EventDate.setText(task.getTaskDate());
         }
 
         this.text_Description = task.getTaskDescription();
+        showContactTable.setItems(observableFiltered);
     }
 
     @FXML

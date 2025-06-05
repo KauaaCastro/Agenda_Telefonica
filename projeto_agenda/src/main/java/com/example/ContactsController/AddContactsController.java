@@ -3,12 +3,10 @@ package com.example.ContactsController;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.function.UnaryOperator;
-
 import com.example.ContactsTable.AppState;
 import com.example.ContactsTable.ContactService;
 import com.example.ContactsTable.LocalStorageManager;
 import com.example.warnings.AlertViewController;
-
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.TaskController.AddTaskController">
+  <top>
+    <HBox alignment="CENTER" prefHeight="170.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+      <children>
+        <Label prefHeight="42.0" prefWidth="282.0" text="Adicionar Tarefas">
+          <font>
+            <Font name="Arial Black" size="28.0"/>
+          </font>
+        </Label>
+      </children>
+    </HBox>
+  </top>
+
+  <right>
+    <VBox prefWidth="500.0" BorderPane.alignment="CENTER">
+      <children>
+        <HBox alignment="BOTTOM_LEFT" prefHeight="45.0" prefWidth="500.0" spacing="30.0">
+          <children>
+            <Label text="Descrição do evento:">
+              <font>
+                <Font size="18.0"/>
+              </font>
+            </Label>
+          </children>
+          <padding>
+            <Insets left="68.0"/>
+          </padding>
+        </HBox>
+        <HBox alignment="CENTER" prefHeight="152.0" prefWidth="500.0" spacing="10.0">
+          <children>
+            <TextArea fx:id="pro_Description" prefHeight="152.0" prefWidth="362.0" promptText="Ex: Lista de compras, lista de compromissos etc..." stylesheets="@../Style/Style.css"/>
+          </children>
+        </HBox>
+        <HBox/>
+        <HBox alignment="CENTER" prefHeight="118.0" prefWidth="500.0" spacing="10.0">
+          <children>
+            <Label text="Selecionar contatos:">
+              <font>
+                <Font size="18.0"/>
+              </font>
+            </Label>
+            <Button fx:id="pro_pushContacts" mnemonicParsing="false" onAction="#GoToSelectContact" stylesheets="@../Style/Style.css">
+              <styleClass>
+                <String fx:value="Rounded-Background"/>
+                <String fx:value="toggle-button"/>
+              </styleClass>
+              <graphic>
+                <ImageView fitHeight="18.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../Style/Icons/SavedContact.png"/>
+                  </image>
+                </ImageView>
+              </graphic>
+            </Button>
+          </children>
+        </HBox>
+        <HBox alignment="BOTTOM_RIGHT" prefHeight="109.0" prefWidth="500.0" spacing="20.0" styleClass="right-pane">
+          <children>
+            <Button fx:id="SaveTask" mnemonicParsing="false" onAction="#SaveTask" stylesheets="@../Style/Style.css" text="Salvar tarefa">
+              <styleClass>
+                <String fx:value="Rounded-Background"/>
+                <String fx:value="toggle-button"/>
+              </styleClass>
+              <graphic>
+                <ImageView fitHeight="18.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../Style/Icons/SavedContact.png"/>
+                  </image>
+                </ImageView>
+              </graphic>
+            </Button>
+            <Button fx:id="HomeScreen" mnemonicParsing="false" onAction="#Return" stylesheets="@../Style/Style.css" text="Retornar">
+              <styleClass>
+                <String fx:value="Rounded-Background"/>
+                <String fx:value="toggle-button"/>
+              </styleClass>
+              <graphic>
+                <ImageView fitHeight="18.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="@../Style/Icons/Go%20Back.png"/>
+                  </image>
+                </ImageView>
+              </graphic>
+            </Button>
+          </children>
+          <padding>
+            <Insets bottom="27.0" right="30.0"/>
+          </padding>
+        </HBox>
+      </children>
+    </VBox>
+  </right>
+
+  <left>
+    <VBox prefWidth="500.0" BorderPane.alignment="CENTER">
+      <children>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+          <children>
+            <Label text="Insira o nome do evento:">
+              <font>
+                <Font size="18.0"/>
+              </font>
+            </Label>
+            <TextField fx:id="pro_name" prefHeight="25.0" prefWidth="152.0" promptText="Ex: Aula de Inglês" stylesheets="@../Style/Style.css">
+              <styleClass>
+                <String fx:value="Rounded-Background"/>
+                <String fx:value="search-bar"/>
+                <String fx:value="text-field"/>
+              </styleClass>
+            </TextField>
+          </children>
+        </HBox>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+          <children>
+            <Label text="Endereço do evento:">
+              <font>
+                <Font size="18.0"/>
+              </font>
+            </Label>
+            <TextField fx:id="pro_endress" prefHeight="30.0" prefWidth="195.0" promptText="FIsk, Centro Taubaté" stylesheets="@../Style/Style.css">
+              <styleClass>
+                <String fx:value="Rounded-Background"/>
+                <String fx:value="search-bar"/>
+                <String fx:value="text-field"/>
+              </styleClass>
+            </TextField>
+          </children>
+        </HBox>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+          <children>
+            <Label text="Hora do evento:">
+              <font>
+                <Font size="18.0"/>
+              </font>
+            </Label>
+            <TextField fx:id="pro_hoursTime" prefHeight="30.0" prefWidth="236.0" stylesheets="@../Style/Style.css" text="00:00">
+              <styleClass>
+                <String fx:value="Rounded-Background"/>
+                <String fx:value="search-bar"/>
+                <String fx:value="text-field"/>
+              </styleClass>
+            </TextField>
+          </children>
+        </HBox>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+          <children>
+            <Label text="Data do evento:">
+              <font>
+                <Font size="18.0"/>
+              </font>
+            </Label>
+            <DatePicker fx:id="pro_EventDate" editable="false" prefHeight="38.0" prefWidth="214.0" promptText="Data do evento" showWeekNumbers="true" stylesheets="@../Style/Style.css">
+              <cursor>
+                <Cursor fx:constant="HAND"/>
+              </cursor>
+            </DatePicker>
+          </children>
+        </HBox>
+      </children>
+    </VBox>
+  </left>
+</BorderPane>

@@ -1,9 +1,7 @@
 package com.example.ContactsTable;
 
 import java.util.UUID;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
