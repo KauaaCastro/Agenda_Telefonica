@@ -2,7 +2,6 @@ package com.example.warnings;
 
 import java.io.IOException;
 import com.example.ContactsTable.ContactService;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

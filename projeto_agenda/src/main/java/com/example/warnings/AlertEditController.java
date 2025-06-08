@@ -6,10 +6,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Optional;
 import java.util.function.UnaryOperator;
-
 import com.example.ContactsTable.ContactService;
 import com.example.ContactsTable.LocalStorageManager;
-
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

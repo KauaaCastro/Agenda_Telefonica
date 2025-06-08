@@ -1,10 +1,11 @@
 package com.example.warnings;
 
+import java.io.IOException;
 import java.util.List;
 
+import com.example.TaskStorageManager.TaskLSManager;
 import com.example.TaskTable.TaskAppState;
 import com.example.TaskTable.TaskService;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -27,6 +28,8 @@ public class AlertExcludeTask {
 
     private List<TaskService> tasksToDelete;
 
+    TaskLSManager manager = new TaskLSManager();
+
     public void setTasksToDelete(List<TaskService> tasks) {
         this.tasksToDelete = tasks;
         Alert_Menssage.setText("Você tem certeza que deseja excluir " + tasks.size() + " tarefa(s)?");
@@ -36,16 +39,28 @@ public class AlertExcludeTask {
     void CancelRemove(ActionEvent event) {
         Stage stage = (Stage) cancel.getScene().getWindow();
         stage.close();
+        System.out.println("Cancelado");
     }
 
     @FXML
     void ConfirmationExclude(ActionEvent event) {
+
         if (tasksToDelete != null && !tasksToDelete.isEmpty()) {
+
             for (TaskService task : tasksToDelete) {
                 task.setSelected(false);
+
+                try {
+                    manager.RemoveTaskById(task.getTaskId());
+
+                } catch (IOException e) {
+                    System.out.println("Ocorreu um erro ao excluir o contato! (base json)");
+                    e.printStackTrace();
+
+                }
+
                 TaskAppState.RemoveTask(task);
             }
-
         }
 
         Stage oldStage = (Stage) cancel.getScene().getWindow();
@@ -58,8 +73,5 @@ public class AlertExcludeTask {
         warning.initModality(Modality.APPLICATION_MODAL);
         warning.showAndWait();
 
-        // Fecha a janela após a exclusão
-        Stage stage = (Stage) ExcludeConfirm.getScene().getWindow();
-        stage.close();
     }
 }

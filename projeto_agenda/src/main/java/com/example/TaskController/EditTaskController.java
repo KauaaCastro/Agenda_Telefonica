@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.util.StringConverter;
 import com.example.TaskTable.TaskService;
+import com.example.TaskStorageManager.TaskLSManager;
 import com.example.TaskTable.TaskContactRelation;
 import com.example.TaskTable.TaskContactState;
 import javafx.application.Platform;
@@ -216,17 +217,29 @@ public class EditTaskController {
         task.setTaskTime(eventTime);
         task.setTaskDate(formattedDate);
 
+        // TaskContactState.updateRelation(relation); atualiza na memória
         TaskContactRelation relation = new TaskContactRelation(task.getTaskId(), selectedContactIds);
-        TaskContactState.updateRelation(relation);
+        TaskLSManager lsManager = new TaskLSManager();
 
-        System.out.println("\033\143");
-        System.out.println("Tarefa atualizada:");
-        System.out.println("Nome: " + task.getTaskName());
-        System.out.println("Endereço: " + task.getTaskEndress());
-        System.out.println("Hora: " + task.getTaskTime());
-        System.out.println("Descrição: " + task.getTaskDescription());
-        System.out.println("Data: " + task.getTaskDate());
-        System.out.println("Contatos: " + relation);
+        try {
+            lsManager.EditTask(task);
+
+            List<TaskContactRelation> updatedRelations = new ArrayList<>();
+            updatedRelations.add(relation);
+            lsManager.saveOrUpdateRelation(updatedRelations);
+
+        } catch (IOException e) {
+            System.out.println("\033\143");
+            e.printStackTrace();
+
+            System.out.println("Tarefa atualizada:");
+            System.out.println("Nome: " + task.getTaskName());
+            System.out.println("Endereço: " + task.getTaskEndress());
+            System.out.println("Hora: " + task.getTaskTime());
+            System.out.println("Descrição: " + task.getTaskDescription());
+            System.out.println("Data: " + task.getTaskDate());
+            System.out.println("Contatos: " + relation);
+        }
 
         Stage oldStage = (Stage) edit_name.getScene().getWindow();
         oldStage.hide();
@@ -241,7 +254,6 @@ public class EditTaskController {
 
             oldStage.close();
         });
-
     }
 
     // Visualizar informações

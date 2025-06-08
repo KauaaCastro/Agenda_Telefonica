@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
-import com.example.ContactsTable.LocalStorageManager;
 import com.example.TaskStorageManager.TaskLSManager;
 import com.example.TaskTable.TaskContactRelation;
 import com.example.TaskTable.TaskContactState;
@@ -59,8 +58,6 @@ public class ListTaskController {
     private FilteredList<TaskService> filteredData;
 
     private ObservableList<TaskService> taskList;
-
-    private LocalStorageManager storageManager = new LocalStorageManager();
 
     @FXML
     public void initialize() {
@@ -125,8 +122,6 @@ public class ListTaskController {
                         stage.setScene(new Scene(root));
                         stage.initModality(Modality.APPLICATION_MODAL);
                         stage.showAndWait();
-
-                        Table_ListTask.getItems().remove(taskService);
 
                     } catch (IOException e) {
                         e.printStackTrace();

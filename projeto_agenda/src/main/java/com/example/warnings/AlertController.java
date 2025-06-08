@@ -2,11 +2,8 @@ package com.example.warnings;
 
 import com.example.ContactsTable.ContactService;
 import com.example.ContactsTable.LocalStorageManager;
-
 import java.util.List;
-
 import com.example.ContactsTable.AppState;
-
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

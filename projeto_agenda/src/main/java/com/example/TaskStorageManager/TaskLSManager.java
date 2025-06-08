@@ -20,7 +20,10 @@ public class TaskLSManager {
     private static final String TASKS_FILE = "projeto_agenda/src/main/java/com/example/Storage/localTaskStorage.json";
     private static final String RELATIONS_FILE = "projeto_agenda/src/main/java/com/example/Storage/localRelationStorage.json";
 
+    // Remover supressWarnings para casos de teste e erros
+    @SuppressWarnings("unused")
     private final ObservableList<TaskService> tasks = FXCollections.observableArrayList();
+    @SuppressWarnings("unused")
     private final ObservableList<TaskContactRelation> relations = FXCollections.observableArrayList();
 
     private final ObjectMapper objectMapper;
@@ -72,20 +75,6 @@ public class TaskLSManager {
         return new ArrayList<>();
     }
 
-    // Carregar lista de relações
-    public static TaskContactRelation loadRelationFromJson(File file) {
-        ObjectMapper mapper = new ObjectMapper();
-
-        try {
-            return mapper.readValue(file, TaskContactRelation.class);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-
-        }
-    }
-
     // Salvar ou atualizar uma relação na lista e no arquivo JSON
     public void saveOrUpdateRelation(List<TaskContactRelation> newRelations) throws IOException {
         List<TaskContactRelation> existingRelations = loadRelations();
@@ -112,7 +101,62 @@ public class TaskLSManager {
         saveRelations(existingRelations);
     }
 
-    // Métodos para busca por ids:
+    // Método para deletar Tarefas e suas Relações
+    public void RemoveTaskById(String taskId) throws IOException {
+
+        // Remove a lista de tarefas selecionadas
+        List<TaskService> selectedTask = loadTasks();
+        boolean taskRemoved = selectedTask.removeIf(tasks -> tasks.getTaskId().equals(taskId));
+
+        System.out.println("\033\143");
+        System.out.println("Tamanho da lista de tarefa: " + selectedTask.size());
+        System.out.println("Lista de tarefas: " + selectedTask);
+
+        if (taskRemoved) {
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(TASKS_FILE), selectedTask);
+
+        }
+
+        // Remove a lista de relações
+        List<TaskContactRelation> selectedRelations = loadRelations();
+        boolean relationRemove = selectedRelations.removeIf(relations -> relations.getTaskId().equals(taskId));
+
+        System.out.println("Tamanho da lista de relações: " + selectedRelations.size());
+        System.out.println("Lista de relações: " + selectedRelations);
+
+        if (relationRemove) {
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(RELATIONS_FILE), selectedRelations);
+
+        }
+    }
+
+    // Edita tarefas:
+    public void EditTask(TaskService updatedTask) throws IOException {
+        List<TaskService> allTasks = loadTasks();
+        boolean confirmation = false;
+
+        for (int i = 0; i < allTasks.size(); i++) {
+
+            if (allTasks.get(i).getTaskId().equals(updatedTask.getTaskId())) {
+                System.out.println("\033\143");
+                allTasks.set(i, updatedTask);
+                confirmation = true;
+                System.out.println("Tarefa encontrada!");
+                System.out.println(updatedTask.getJsonId());
+                break;
+
+            }
+
+        }
+
+        if (!confirmation) {
+            System.out.println("Tarefa não encontrada");
+        }
+
+        objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(TASKS_FILE), allTasks);
+    }
+
+    // Métodos de carregamento (carregar tarefas e relações)
     public static List<TaskService> loadAllTasks(File file) {
         ObjectMapper mapper = new ObjectMapper();
 
@@ -139,21 +183,6 @@ public class TaskLSManager {
         }
     }
 
-    public static Optional<TaskService> findTaskById(List<TaskService> tasks, String taskId) {
-        return tasks.stream()
-                .filter(t -> t.getTaskId().equals(taskId))
-                .findFirst();
-
-    }
-
-    public static Optional<TaskContactRelation> findRelationByTaskId(List<TaskContactRelation> relations,
-            String taskId) {
-        return relations.stream()
-                .filter(r -> r.getTaskId().equals(taskId))
-                .findFirst();
-
-    }
-
     public static List<TaskContactRelation> loadRelationsFromJson() {
         ObjectMapper mapper = new ObjectMapper();
 
@@ -166,7 +195,6 @@ public class TaskLSManager {
 
                 List<TaskContactRelation> relations = mapper.readValue(file, listType);
 
-                // Atualiza o estado global
                 TaskContactState.clearRelations();
                 TaskContactState.getTaskContactRelations().addAll(relations);
 
@@ -187,7 +215,23 @@ public class TaskLSManager {
         return Collections.emptyList();
     }
 
-    // Método auxiliar
+    // Filtro de identificação de itens (contatos e tarefas)
+    public static Optional<TaskService> findTaskById(List<TaskService> tasks, String taskId) {
+        return tasks.stream()
+                .filter(t -> t.getTaskId().equals(taskId))
+                .findFirst();
+
+    }
+
+    public static Optional<TaskContactRelation> findRelationByTaskId(List<TaskContactRelation> relations,
+            String taskId) {
+        return relations.stream()
+                .filter(r -> r.getTaskId().equals(taskId))
+                .findFirst();
+
+    }
+
+    // Método auxiliar --> Salvar nova task
     public void saveRelations(List<TaskContactRelation> relations) throws IOException {
         objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(RELATIONS_FILE), relations);
 

@@ -1,37 +1,102 @@
-[ {
-  "taskName" : "Nome",
-  "taskDate" : "2025-06-01",
-  "taskTime" : "10:10",
-  "taskEndress" : "Endereço",
-  "taskDescription" : "Descrição",
-  "selected" : false,
-  "taskId" : "f93b2cc2-33ef-41a3-898a-2f72457d8469",
-  "id" : "f93b2cc2-33ef-41a3-898a-2f72457d8469"
-}, {
-  "taskName" : "Projeto",
-  "taskDate" : "2025-06-05",
-  "taskTime" : "19:30",
-  "taskEndress" : "Juta, Unitau",
-  "taskDescription" : "Apresentação do projeto integrador durante a aula de quinta feira\nAula do: Prof Flávio",
-  "selected" : false,
-  "taskId" : "24068b9d-a6f0-4d8f-839c-56b2cb47da6d",
-  "id" : "24068b9d-a6f0-4d8f-839c-56b2cb47da6d"
-}, {
-  "taskName" : "viagem",
-  "taskDate" : "2025-07-02",
-  "taskTime" : "07:00",
-  "taskEndress" : "Rua Caúna - Martim de Sá",
-  "taskDescription" : "Ir para caragua tirar férias",
-  "selected" : false,
-  "taskId" : "cbe1a6b8-34a9-41ab-a52c-0b9e9da5b12e",
-  "id" : "cbe1a6b8-34a9-41ab-a52c-0b9e9da5b12e"
-}, {
-  "taskName" : "Enari",
-  "taskDate" : "2025-06-09",
-  "taskTime" : "19:30",
-  "taskEndress" : "Juta Unitau",
-  "taskDescription" : "Mostrar projeto agenda para o Enari",
-  "selected" : false,
-  "taskId" : "17e36c49-88bc-4e52-bd9f-4cbbdb6d9423",
-  "id" : "17e36c49-88bc-4e52-bd9f-4cbbdb6d9423"
-} ]
+[
+  {
+    "taskName": "Nome",
+    "taskDate": "2025-06-01",
+    "taskTime": "10:10",
+    "taskEndress": "Endereço",
+    "taskDescription": "Descrição, apenas uma tarefa criada para testes e debug",
+    "selected": false,
+    "taskId": "f93b2cc2-33ef-41a3-898a-2f72457d8469",
+    "id": "f93b2cc2-33ef-41a3-898a-2f72457d8469"
+  },
+  {
+    "taskName": "Projeto",
+    "taskDate": "2025-06-05",
+    "taskTime": "19:30",
+    "taskEndress": "Juta, Unitau",
+    "taskDescription": "Apresentação do projeto integrador durante a aula de quinta feira\nAula do: Prof Flávio",
+    "selected": false,
+    "taskId": "24068b9d-a6f0-4d8f-839c-56b2cb47da6d",
+    "id": "24068b9d-a6f0-4d8f-839c-56b2cb47da6d"
+  },
+  {
+    "taskName": "viagem",
+    "taskDate": "2025-07-02",
+    "taskTime": "07:00",
+    "taskEndress": "Rua Caúna - Martim de Sá",
+    "taskDescription": "Ir para caragua tirar férias",
+    "selected": false,
+    "taskId": "cbe1a6b8-34a9-41ab-a52c-0b9e9da5b12e",
+    "id": "cbe1a6b8-34a9-41ab-a52c-0b9e9da5b12e"
+  },
+  {
+    "taskName": "Enari",
+    "taskDate": "2025-06-09",
+    "taskTime": "19:30",
+    "taskEndress": "Juta Unitau",
+    "taskDescription": "Mostrar projeto agenda para o Enari",
+    "selected": false,
+    "taskId": "17e36c49-88bc-4e52-bd9f-4cbbdb6d9423",
+    "id": "17e36c49-88bc-4e52-bd9f-4cbbdb6d9423"
+  },
+  {
+    "taskName": "Teste",
+    "taskDate": "2025-06-03",
+    "taskTime": "12:43",
+    "taskEndress": "apenas teste",
+    "taskDescription": "",
+    "selected": false,
+    "taskId": "05fcc61e-5917-4043-bd0a-d54329185b94",
+    "id": "05fcc61e-5917-4043-bd0a-d54329185b94"
+  },
+  {
+    "taskName": "Josinei ",
+    "taskDate": "2025-06-10",
+    "taskTime": "19:30",
+    "taskEndress": "Unitau, JUTA",
+    "taskDescription": "Prova do professor Josinei",
+    "selected": false,
+    "taskId": "7dbcbb9a-ca00-427c-afda-9b3638a8bac0",
+    "id": "7dbcbb9a-ca00-427c-afda-9b3638a8bac0"
+  },
+  {
+    "taskName": "Shopping",
+    "taskDate": "2025-06-20",
+    "taskTime": "20:00",
+    "taskEndress": "Shopping Buriti, Guaratinguetá",
+    "taskDescription": "Ir ao shopping buriti comprar produtos de maquiagem e cabelo",
+    "selected": false,
+    "taskId": "b5fd607f-d3c7-47ae-a62e-34be1d48ff74",
+    "id": "b5fd607f-d3c7-47ae-a62e-34be1d48ff74"
+  },
+  {
+    "taskName": "Manicure",
+    "taskDate": "2025-06-16",
+    "taskTime": "14:30",
+    "taskEndress": "Alameda seis de janeiro, 580",
+    "taskDescription": "Fazer unha na manicure e gastar dinheiro ",
+    "selected": false,
+    "taskId": "2975a106-239d-4f0e-8f39-e62be5c028ca",
+    "id": "2975a106-239d-4f0e-8f39-e62be5c028ca"
+  },
+  {
+    "taskName": "Jogar",
+    "taskDate": "2025-06-06",
+    "taskTime": "21:00",
+    "taskEndress": "Casa, Setup",
+    "taskDescription": "Jogar a madrugada inteira red dead redemption 2",
+    "selected": false,
+    "taskId": "80b27cec-487c-413b-8328-0f28c1f0d5f7",
+    "id": "80b27cec-487c-413b-8328-0f28c1f0d5f7"
+  },
+  {
+    "taskName": "Prova",
+    "taskDate": "2025-06-12",
+    "taskTime": "19:30",
+    "taskEndress": "Juta, Unitau",
+    "taskDescription": "Prova de linguagem de programação",
+    "selected": false,
+    "taskId": "d034eccc-fe30-4391-a71e-34c81f873d15",
+    "id": "d034eccc-fe30-4391-a71e-34c81f873d15"
+  }
+]

@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import com.example.ContactsTable.AppState;
 import com.example.ContactsTable.ContactService;
 import com.example.TaskController.ViewTasksController;
@@ -13,7 +12,6 @@ import com.example.TaskTable.TaskAppState;
 import com.example.TaskTable.TaskContactRelation;
 import com.example.TaskTable.TaskContactState;
 import com.example.TaskTable.TaskService;
-
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
