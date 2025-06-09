@@ -8,10 +8,13 @@ import java.util.stream.Collectors;
 import com.example.ContactsTable.AppState;
 import com.example.ContactsTable.ContactService;
 import com.example.TaskController.ViewTasksController;
+import com.example.TaskStorageManager.TaskLSManager;
 import com.example.TaskTable.TaskAppState;
 import com.example.TaskTable.TaskContactRelation;
 import com.example.TaskTable.TaskContactState;
 import com.example.TaskTable.TaskService;
+
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
@@ -20,8 +23,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -51,8 +58,14 @@ public class ListAllTask {
     @FXML
     private TableColumn<TaskService, String> table_Name;
 
+    // @SuppressWarnings("unchecked") // Remover para debug e execução de código
     @FXML
     void initialize() {
+        List<TaskService> loadedTasks = TaskLSManager.loadTasksFromJson();
+        TaskAppState.setTasks(FXCollections.observableArrayList(loadedTasks));
+
+        TaskLSManager.loadRelationsFromJson();
+
         table_Name.setCellValueFactory(new PropertyValueFactory<>("taskName"));
         table_Date.setCellValueFactory(new PropertyValueFactory<>("taskDate"));
         date_Hours.setCellValueFactory(new PropertyValueFactory<>("taskTime"));
@@ -98,50 +111,54 @@ public class ListAllTask {
         // Clique duplo para selecionar
         Table_ListTask.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
-                TaskService taskService = Table_ListTask.getSelectionModel().getSelectedItem();
-
-                if (taskService != null) {
-                    String taskId = taskService.getTaskId();
-
-                    // Responsavel por pegar as relaçoes cntt - tarefas
-                    ObservableList<TaskContactRelation> relations = TaskContactState.getRelationsByTaskId(taskId);
-
-                    List<String> contactIds = relations.stream() // Responsavel por resgatar os Ids dos contatos
-                            .flatMap(rel -> rel.getContactId().stream())
-                            .collect(Collectors.toList());
-
-                    @SuppressWarnings("unused")
-                    List<ContactService> relatedContacts = AppState.getContacts().stream() // Responsavel por pegar os
-                            .filter(contact -> contactIds.contains(contact.getId())) // contatos correspondentes
-                            .collect(Collectors.toList()); // ao id
-
-                    Stage oldStage = (Stage) Return.getScene().getWindow();
-                    oldStage.hide();
-
-                    try {
-                        FXMLLoader loader = new FXMLLoader(
-                                getClass().getResource("/com/example/TaskScreen/ViewTaskScreen.fxml"));
-                        Parent root = loader.load();
-
-                        ViewTasksController controller = loader.getController();
-                        TaskContactRelation relation = relations.get(0); // por exemplo, o primeiro da lista
-                        controller.setTask(taskService, relation);
-
-                        Stage stage = new Stage();
-                        stage.setTitle("Seleção de contatos");
-                        stage.setScene(new Scene(root));
-                        stage.initModality(Modality.APPLICATION_MODAL);
-                        stage.show();
-
-                        stage.setOnHiding(e -> oldStage.close());
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        System.out.println();
-                        System.out.println("Ocorre um erro ao tentar abrir a lista de selecao contatos");
-                    }
-                }
+                ShortcutView();
             }
+
+        });
+
+        Table_ListTask.setRowFactory(tv -> {
+            TableRow<TaskService> row = new TableRow<>();
+
+            ContextMenu contextMenu = new ContextMenu();
+            MenuItem shortcutView = new MenuItem("Visualizar tarefa");
+
+            shortcutView.setOnAction(event -> {
+                ShortcutView();
+            });
+
+            MenuItem shortcutRemove = new MenuItem("Remover tarefa");
+
+            shortcutRemove.setOnAction(event -> {
+                TaskService selectedTasks = row.getItem();
+
+                if (selectedTasks == null) {
+                    System.out.println("Erro: Tarefa = null");
+                    return;
+                }
+
+                try {
+                    FXMLLoader loader = new FXMLLoader(
+                            getClass().getResource("/com/example/Alerts/ExcludeTaskConfirm.fxml"));
+                    Parent root = loader.load();
+
+                    AlertExcludeTask controller = loader.getController();
+                    controller.setTasksToDelete(List.of(selectedTasks));
+
+                    Stage stage = new Stage();
+                    stage.setTitle("Confirmação de exclusão");
+                    stage.setScene(new Scene(root));
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    stage.showAndWait();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.out.println("Erro ao carregar a janela de confirmação de exclusão.");
+                }
+            });
+
+            contextMenu.getItems().addAll(shortcutView, shortcutRemove);
+            row.setContextMenu(contextMenu);
+            return row;
         });
 
     }
@@ -185,6 +202,44 @@ public class ListAllTask {
                 stage.showAndWait();
 
                 stage.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println();
+                System.out.println("Ocorre um erro ao tentar abrir a lista de selecao contatos");
+            }
+        }
+    }
+
+    // Método para chamar dentro dos atalhos
+    private void ShortcutView() {
+        TaskService taskService = Table_ListTask.getSelectionModel().getSelectedItem();
+
+        if (taskService != null) {
+            String taskId = taskService.getTaskId();
+
+            // Responsavel por pegar as relaçoes cntt - tarefas
+            ObservableList<TaskContactRelation> relations = TaskContactState.getRelationsByTaskId(taskId);
+
+            Stage oldStage = (Stage) Return.getScene().getWindow();
+            oldStage.hide();
+
+            try {
+                FXMLLoader loader = new FXMLLoader(
+                        getClass().getResource("/com/example/TaskScreen/ViewTaskScreen.fxml"));
+                Parent root = loader.load();
+
+                ViewTasksController controller = loader.getController();
+                TaskContactRelation relation = relations.get(0); // por exemplo, o primeiro da lista
+                controller.setTask(taskService, relation);
+
+                Stage stage = new Stage();
+                stage.setTitle("Seleção de contatos");
+                stage.setScene(new Scene(root));
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.show();
+
+                stage.setOnHiding(e -> oldStage.close());
 
             } catch (IOException e) {
                 e.printStackTrace();

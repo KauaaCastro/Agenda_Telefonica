@@ -12,6 +12,10 @@ public class TaskAppState {
         return tasks;
     }
 
+    public static void setTasks(ObservableList<TaskService> newTasks) {
+        tasks.setAll(newTasks);
+    }
+
     public static void addTask(TaskService task) {
         tasks.add(task);
     }

@@ -1,10 +1,10 @@
 [
   {
-    "taskName": "Nome",
-    "taskDate": "2025-06-01",
-    "taskTime": "10:10",
-    "taskEndress": "Endereço",
-    "taskDescription": "Descrição, apenas uma tarefa criada para testes e debug",
+    "taskName": "Nome (editado)",
+    "taskDate": "2025-06-02",
+    "taskTime": "12:34",
+    "taskEndress": "Endereço (editado)",
+    "taskDescription": "Descrição, apenas uma tarefa criada para testes e debug\n\nEditado",
     "selected": false,
     "taskId": "f93b2cc2-33ef-41a3-898a-2f72457d8469",
     "id": "f93b2cc2-33ef-41a3-898a-2f72457d8469"

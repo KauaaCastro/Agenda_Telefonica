@@ -64,4 +64,8 @@ public class TaskContactState {
 
         return filtered;
     }
+
+    public static void setRelations(ObservableList<TaskContactRelation> newRelations) {
+        TaskContactRelations.setAll(newRelations);
+    }
 }

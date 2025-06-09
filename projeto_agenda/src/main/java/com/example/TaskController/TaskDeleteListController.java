@@ -7,11 +7,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 import com.example.ContactsTable.AppState;
 import com.example.ContactsTable.ContactService;
+import com.example.TaskStorageManager.TaskLSManager;
 import com.example.TaskTable.TaskAppState;
 import com.example.TaskTable.TaskContactRelation;
 import com.example.TaskTable.TaskContactState;
 import com.example.TaskTable.TaskService;
 import com.example.warnings.AlertExcludeTask;
+
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
@@ -20,6 +23,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -64,6 +69,10 @@ public class TaskDeleteListController {
 
     @FXML
     void initialize() {
+        List<TaskService> loadedTasks = TaskLSManager.loadTasksFromJson();
+        TaskAppState.setTasks(FXCollections.observableArrayList(loadedTasks));
+
+        TaskLSManager.loadRelationsFromJson();
 
         table_Name.setCellValueFactory(new PropertyValueFactory<>("taskName"));
         table_Date.setCellValueFactory(new PropertyValueFactory<>("taskDate"));
@@ -140,9 +149,50 @@ public class TaskDeleteListController {
                     }
                 }
             };
+
+            ContextMenu contextMenu = new ContextMenu();
+            MenuItem shortcutView = new MenuItem("Visualizar tarefa");
+
+            shortcutView.setOnAction(event -> {
+                ShowTaskSelected(event);
+            });
+
+            MenuItem shortcutSelect = new MenuItem("Selecionar contato");
+            shortcutSelect.setOnAction(event -> {
+                TaskService selected = row.getItem();
+
+                if (selected != null) {
+                    selected.setSelected(true);
+                }
+            });
+
+            MenuItem shortcutRemove = new MenuItem("Deletar tarefa");
+            shortcutRemove.setOnAction(event -> {
+                TaskService selected = row.getItem();
+
+                if (selected != null) {
+                    selected.setSelected(true);
+                    ExcludeTask(event);
+
+                } else {
+                    System.out.println("Erro na seleção de contato para exclusão (shortcut)");
+
+                }
+            });
+
+            MenuItem shortcutDeselect = new MenuItem("Deselecionar contato");
+            shortcutDeselect.setOnAction(event -> {
+                TaskService selected = row.getItem();
+
+                if (selected != null) {
+                    selected.setSelected(false);
+                }
+            });
+
+            contextMenu.getItems().addAll(shortcutView, shortcutSelect, shortcutDeselect, shortcutRemove);
+            row.setContextMenu(contextMenu);
             return row;
         });
-
     }
 
     @FXML

@@ -10,7 +10,6 @@ import javafx.util.StringConverter;
 import com.example.TaskTable.TaskService;
 import com.example.TaskStorageManager.TaskLSManager;
 import com.example.TaskTable.TaskContactRelation;
-import com.example.TaskTable.TaskContactState;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
